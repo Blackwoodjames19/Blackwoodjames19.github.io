@@ -7,523 +7,393 @@
   <title>Women's Revolt™</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300&family=Bebas+Neue&display=swap" rel="stylesheet" />
   <style>
-    :root {
-      --red: #c0001a;
-      --gold: #c9a84c;
-      --cream: #f5f0e8;
-      --black: #0a0a0a;
-    }
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body { background: var(--black); color: var(--cream); font-family: 'Cormorant Garamond', serif; overflow-x: hidden; }
-
-```
-/* ── SPLASH SCREEN ── */
-#splash {
-  position: fixed;
-  inset: 0;
-  z-index: 1000;
-  cursor: pointer;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  transition: opacity 0.8s ease, transform 0.8s ease;
-}
-#splash.hidden { opacity: 0; transform: scale(1.05); pointer-events: none; }
-#splash img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-#splash::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(ellipse at center, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.7) 100%);
-}
-.splash-content {
-  position: relative;
-  z-index: 2;
-  text-align: center;
-  padding: 2rem;
-}
-.splash-title {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(3.5rem, 12vw, 8rem);
-  font-weight: 900;
-  line-height: 0.9;
-  color: #fff;
-  text-shadow: 0 0 60px rgba(192,0,26,0.5);
-  animation: pulseTitle 3s ease-in-out infinite;
-}
-.splash-title em { display: block; color: var(--red); font-style: italic; }
-.splash-sub {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(0.7rem, 2vw, 1rem);
-  letter-spacing: 0.4em;
-  color: var(--gold);
-  margin-top: 1rem;
-  margin-bottom: 3rem;
-}
-.tap-hint {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 0.75rem;
-  letter-spacing: 0.3em;
-  color: rgba(255,255,255,0.6);
-  animation: blink 2s ease-in-out infinite;
-  border: 1px solid rgba(255,255,255,0.3);
-  padding: 0.8rem 2rem;
-}
-@keyframes pulseTitle {
-  0%, 100% { text-shadow: 0 0 60px rgba(192,0,26,0.5); }
-  50% { text-shadow: 0 0 100px rgba(192,0,26,0.8), 0 0 30px rgba(201,168,76,0.3); }
-}
-@keyframes blink {
-  0%, 100% { opacity: 0.6; }
-  50% { opacity: 1; }
-}
-
-/* ── MAIN CONTENT ── */
-#main { opacity: 0; transition: opacity 1s ease 0.3s; }
-#main.visible { opacity: 1; }
-
-/* NAV */
-nav {
-  position: fixed;
-  top: 0; left: 0; right: 0;
-  z-index: 100;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1.5rem 2rem;
-  background: rgba(10,10,10,0.9);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(201,168,76,0.15);
-}
-.nav-brand {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.1rem;
-  font-weight: 900;
-}
-.nav-brand span { color: var(--red); font-style: italic; }
-.nav-tag {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 0.65rem;
-  letter-spacing: 0.3em;
-  color: var(--gold);
-  text-transform: uppercase;
-}
-
-/* SECTIONS */
-.section { padding: 6rem 2rem; max-width: 1000px; margin: 0 auto; }
-.section-label {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 0.65rem;
-  letter-spacing: 0.4em;
-  color: var(--gold);
-  text-transform: uppercase;
-  margin-bottom: 1.5rem;
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-.section-label::after { content: ''; flex: 1; height: 1px; background: rgba(201,168,76,0.25); }
-h2 {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(2rem, 5vw, 3.5rem);
-  font-weight: 900;
-  line-height: 1.05;
-  margin-bottom: 1.5rem;
-}
-h2 em { color: var(--red); font-style: italic; }
-.body-text {
-  font-size: 1.15rem;
-  font-weight: 300;
-  line-height: 1.9;
-  color: rgba(245,240,232,0.75);
-  margin-bottom: 1.2rem;
-}
-.red-bar { height: 3px; background: linear-gradient(90deg, var(--red), var(--gold), var(--red)); }
-
-/* HERO SECTION */
-.hero-section {
-  min-height: 60vh;
-  display: flex;
-  align-items: center;
-  padding-top: 8rem;
-  background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(192,0,26,0.12) 0%, transparent 70%);
-}
-.slogan-big {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(1rem, 3vw, 1.5rem);
-  letter-spacing: 0.3em;
-  color: var(--gold);
-  margin-bottom: 2rem;
-}
-
-/* GRID SECTORS */
-.sectors-bg { background: #0d0b0b; padding: 6rem 0; }
-.sectors-inner { max-width: 1000px; margin: 0 auto; padding: 0 2rem; }
-.sectors-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.5rem;
-  margin-top: 3rem;
-}
-.sector-card {
-  border: 1px solid rgba(245,240,232,0.07);
-  padding: 2rem 1.5rem;
-  transition: border-color 0.3s, transform 0.3s;
-  position: relative;
-  overflow: hidden;
-}
-.sector-card::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 2px;
-  background: var(--red);
-  transform: scaleX(0);
-  transition: transform 0.3s;
-}
-.sector-card:hover::before { transform: scaleX(1); }
-.sector-card:hover { border-color: rgba(201,168,76,0.25); transform: translateY(-3px); }
-.sector-icon { font-size: 2rem; margin-bottom: 1rem; }
-.sector-title {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 1rem;
-  letter-spacing: 0.2em;
-  color: var(--gold);
-  margin-bottom: 0.7rem;
-  text-transform: uppercase;
-}
-.sector-desc { font-size: 0.9rem; line-height: 1.7; color: rgba(245,240,232,0.55); }
-
-/* BOOKS */
-.book-list { margin-top: 2.5rem; display: flex; flex-direction: column; gap: 1.5rem; }
-.book-item {
-  border-left: 3px solid var(--red);
-  padding: 1.5rem 2rem;
-  background: rgba(255,255,255,0.02);
-  transition: background 0.3s;
-}
-.book-item:hover { background: rgba(255,255,255,0.04); }
-.book-vol {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 0.65rem;
-  letter-spacing: 0.35em;
-  color: var(--red);
-  margin-bottom: 0.5rem;
-}
-.book-name { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 700; margin-bottom: 0.5rem; }
-.book-note { font-size: 0.9rem; color: rgba(245,240,232,0.5); font-style: italic; }
-
-/* CAST */
-.cast-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1rem;
-  margin-top: 2.5rem;
-}
-.cast-item {
-  padding: 1rem 1.2rem;
-  border: 1px solid rgba(245,240,232,0.06);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 0.9rem;
-}
-.cast-actor { color: var(--gold); font-weight: 600; }
-.cast-role { color: rgba(245,240,232,0.5); font-style: italic; }
-
-/* ANIMATED */
-.anim-section { background: #0a0a0f; padding: 6rem 0; }
-.anim-inner { max-width: 1000px; margin: 0 auto; padding: 0 2rem; }
-.characters { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 2rem; }
-.char-tag {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 0.8rem;
-  letter-spacing: 0.2em;
-  padding: 0.6rem 1.2rem;
-  border: 1px solid rgba(201,168,76,0.3);
-  color: var(--gold);
-}
-
-/* FOUNDATION */
-.foundation-section {
-  background: linear-gradient(135deg, #150000, #0a0a0a);
-  border-top: 1px solid rgba(192,0,26,0.2);
-  border-bottom: 1px solid rgba(192,0,26,0.2);
-  padding: 6rem 2rem;
-  text-align: center;
-}
-.foundation-inner { max-width: 700px; margin: 0 auto; }
-.percent {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 6rem;
-  color: var(--red);
-  line-height: 1;
-  margin-bottom: 0.5rem;
-}
-
-/* SUPPORT */
-.support-section { padding: 6rem 2rem; text-align: center; }
-.support-inner { max-width: 600px; margin: 0 auto; }
-.btn {
-  display: inline-block;
-  text-decoration: none;
-  font-family: 'Bebas Neue', sans-serif;
-  letter-spacing: 0.2em;
-  font-size: 0.9rem;
-  padding: 1rem 2.5rem;
-  transition: all 0.3s;
-  margin: 0.5rem;
-}
-.btn-primary { background: var(--red); color: #fff; }
-.btn-primary:hover { background: #e0001f; transform: translateY(-2px); box-shadow: 0 8px 30px rgba(192,0,26,0.4); }
-.btn-outline { border: 1px solid rgba(201,168,76,0.5); color: var(--gold); }
-.btn-outline:hover { background: rgba(201,168,76,0.1); transform: translateY(-2px); }
-
-/* SOCIAL */
-.social-row { display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; margin-top: 2rem; }
-.social-link {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 0.7rem;
-  letter-spacing: 0.25em;
-  text-decoration: none;
-  color: rgba(245,240,232,0.5);
-  border: 1px solid rgba(245,240,232,0.12);
-  padding: 0.7rem 1.5rem;
-  transition: all 0.3s;
-}
-.social-link:hover { color: var(--gold); border-color: var(--gold); }
-
-/* FOOTER */
-footer {
-  padding: 2.5rem 2rem;
-  border-top: 1px solid rgba(245,240,232,0.07);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 1rem;
-}
-.footer-brand { font-family: 'Playfair Display', serif; font-weight: 900; font-size: 1.2rem; }
-.footer-brand span { color: var(--red); font-style: italic; }
-.footer-copy { font-size: 0.75rem; letter-spacing: 0.08em; color: rgba(245,240,232,0.3); text-transform: uppercase; }
-
-@media (max-width: 600px) {
-  .sectors-grid { grid-template-columns: repeat(2, 1fr); }
-  .cast-grid { grid-template-columns: 1fr; }
-  nav { padding: 1rem; }
-  footer { flex-direction: column; text-align: center; }
-}
-@media (max-width: 380px) {
-  .sectors-grid { grid-template-columns: 1fr; }
-}
-```
-
+    :root{--red:#c0001a;--gold:#c9a84c;--cream:#f5f0e8;--black:#0a0a0a;}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:smooth;}
+    body{background:var(--black);color:var(--cream);font-family:'Cormorant Garamond',serif;overflow-x:hidden;}
+    .lang-bar{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;justify-content:flex-end;align-items:center;padding:0.5rem 1.5rem;background:rgba(10,10,10,0.97);border-bottom:1px solid rgba(201,168,76,0.1);}
+    .lang-btn{background:none;border:1px solid rgba(201,168,76,0.25);color:var(--cream);font-family:'Bebas Neue',sans-serif;font-size:0.65rem;letter-spacing:0.15em;padding:0.3rem 0.7rem;cursor:pointer;margin-left:0.4rem;transition:all 0.3s;}
+    .lang-btn:hover,.lang-btn.active{border-color:var(--gold);color:var(--gold);}
+    nav{position:fixed;top:34px;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:1rem 2rem;background:rgba(10,10,10,0.93);backdrop-filter:blur(10px);border-bottom:1px solid rgba(201,168,76,0.1);}
+    .nav-brand{font-family:'Playfair Display',serif;font-size:1rem;font-weight:900;}
+    .nav-brand span{color:var(--red);font-style:italic;}
+    .nav-tag{font-family:'Bebas Neue',sans-serif;font-size:0.55rem;letter-spacing:0.25em;color:var(--gold);}
+    #splash{position:fixed;inset:0;z-index:1000;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity 0.8s ease,transform 0.8s ease;}
+    #splash.hidden{opacity:0;transform:scale(1.05);pointer-events:none;}
+    #splash img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+    #splash::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(0,0,0,0.25) 0%,rgba(0,0,0,0.72) 100%);}
+    .splash-content{position:relative;z-index:2;text-align:center;padding:2rem;}
+    .splash-title{font-family:'Playfair Display',serif;font-size:clamp(3.5rem,12vw,8rem);font-weight:900;line-height:0.9;color:#fff;text-shadow:0 0 60px rgba(192,0,26,0.5);animation:pulseTitle 3s ease-in-out infinite;}
+    .splash-title em{display:block;color:var(--red);font-style:italic;}
+    .splash-sub{font-family:'Bebas Neue',sans-serif;font-size:clamp(0.7rem,2vw,1rem);letter-spacing:0.4em;color:var(--gold);margin-top:1rem;margin-bottom:3rem;}
+    .tap-hint{font-family:'Bebas Neue',sans-serif;font-size:0.75rem;letter-spacing:0.3em;color:rgba(255,255,255,0.6);animation:blink 2s ease-in-out infinite;border:1px solid rgba(255,255,255,0.3);padding:0.8rem 2rem;}
+    @keyframes pulseTitle{0%,100%{text-shadow:0 0 60px rgba(192,0,26,0.5);}50%{text-shadow:0 0 100px rgba(192,0,26,0.8);}}
+    @keyframes blink{0%,100%{opacity:0.6;}50%{opacity:1;}}
+    #main{opacity:0;transition:opacity 1s ease 0.3s;}
+    #main.visible{opacity:1;}
+    .section{padding:6rem 2rem;max-width:1000px;margin:0 auto;}
+    .section-label{font-family:'Bebas Neue',sans-serif;font-size:0.65rem;letter-spacing:0.4em;color:var(--gold);text-transform:uppercase;margin-bottom:1.5rem;display:flex;align-items:center;gap:1rem;}
+    .section-label::after{content:'';flex:1;height:1px;background:rgba(201,168,76,0.25);}
+    h2{font-family:'Playfair Display',serif;font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1.05;margin-bottom:1.5rem;}
+    h2 em{color:var(--red);font-style:italic;}
+    .body-text{font-size:1.1rem;font-weight:300;line-height:1.9;color:rgba(245,240,232,0.75);margin-bottom:1.2rem;}
+    .red-bar{height:3px;background:linear-gradient(90deg,var(--red),var(--gold),var(--red));}
+    .hero-section{min-height:60vh;display:flex;align-items:center;padding-top:9rem;background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(192,0,26,0.12) 0%,transparent 70%);}
+    .slogan-big{font-family:'Bebas Neue',sans-serif;font-size:clamp(0.9rem,3vw,1.4rem);letter-spacing:0.3em;color:var(--gold);margin-bottom:2rem;}
+    .sectors-bg{background:#0d0b0b;padding:6rem 0;}
+    .sectors-inner{max-width:1000px;margin:0 auto;padding:0 2rem;}
+    .sectors-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3rem;}
+    .sector-card{border:1px solid rgba(245,240,232,0.07);padding:1.8rem 1.3rem;transition:border-color 0.3s,transform 0.3s;position:relative;overflow:hidden;}
+    .sector-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--red);transform:scaleX(0);transition:transform 0.3s;}
+    .sector-card:hover::before{transform:scaleX(1);}
+    .sector-card:hover{border-color:rgba(201,168,76,0.25);transform:translateY(-3px);}
+    .sector-icon{font-size:1.8rem;margin-bottom:0.8rem;}
+    .sector-title{font-family:'Bebas Neue',sans-serif;font-size:0.9rem;letter-spacing:0.2em;color:var(--gold);margin-bottom:0.6rem;}
+    .sector-desc{font-size:0.85rem;line-height:1.6;color:rgba(245,240,232,0.5);}
+    .book-list{margin-top:2.5rem;display:flex;flex-direction:column;gap:1.5rem;}
+    .book-item{border-left:3px solid var(--red);padding:1.5rem 2rem;background:rgba(255,255,255,0.02);}
+    .book-vol{font-family:'Bebas Neue',sans-serif;font-size:0.65rem;letter-spacing:0.35em;color:var(--red);margin-bottom:0.5rem;}
+    .book-name{font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;margin-bottom:0.5rem;}
+    .book-note{font-size:0.85rem;color:rgba(245,240,232,0.5);font-style:italic;}
+    .cast-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;margin-top:2.5rem;}
+    .cast-item{padding:1rem 1.2rem;border:1px solid rgba(245,240,232,0.06);display:flex;justify-content:space-between;align-items:center;font-size:0.9rem;}
+    .cast-actor{color:var(--gold);font-weight:600;}
+    .cast-role{color:rgba(245,240,232,0.5);font-style:italic;}
+    .anim-section{background:#0a0a0f;padding:6rem 0;}
+    .anim-inner{max-width:1000px;margin:0 auto;padding:0 2rem;}
+    .characters{display:flex;flex-wrap:wrap;gap:1rem;margin-top:2rem;}
+    .char-tag{font-family:'Bebas Neue',sans-serif;font-size:0.8rem;letter-spacing:0.2em;padding:0.6rem 1.2rem;border:1px solid rgba(201,168,76,0.3);color:var(--gold);}
+    .foundation-section{background:linear-gradient(135deg,#150000,#0a0a0a);border-top:1px solid rgba(192,0,26,0.2);border-bottom:1px solid rgba(192,0,26,0.2);padding:6rem 2rem;text-align:center;}
+    .foundation-inner{max-width:700px;margin:0 auto;}
+    .percent{font-family:'Bebas Neue',sans-serif;font-size:6rem;color:var(--red);line-height:1;margin-bottom:0.5rem;}
+    .support-section{padding:6rem 2rem;text-align:center;}
+    .support-inner{max-width:600px;margin:0 auto;}
+    .btn{display:inline-block;text-decoration:none;font-family:'Bebas Neue',sans-serif;letter-spacing:0.2em;font-size:0.9rem;padding:1rem 2.5rem;transition:all 0.3s;margin:0.5rem;border:none;cursor:pointer;}
+    .btn-primary{background:var(--red);color:#fff;}
+    .btn-primary:hover{background:#e0001f;transform:translateY(-2px);box-shadow:0 8px 30px rgba(192,0,26,0.4);}
+    .btn-outline{border:1px solid rgba(201,168,76,0.5);color:var(--gold);}
+    .btn-outline:hover{background:rgba(201,168,76,0.1);transform:translateY(-2px);}
+    .social-row{display:flex;justify-content:center;gap:2rem;flex-wrap:wrap;margin-top:2rem;}
+    .social-link{font-family:'Bebas Neue',sans-serif;font-size:0.7rem;letter-spacing:0.25em;text-decoration:none;color:rgba(245,240,232,0.5);border:1px solid rgba(245,240,232,0.12);padding:0.7rem 1.5rem;transition:all 0.3s;}
+    .social-link:hover{color:var(--gold);border-color:var(--gold);}
+    footer{padding:2.5rem 2rem;border-top:1px solid rgba(245,240,232,0.07);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;}
+    .footer-brand{font-family:'Playfair Display',serif;font-weight:900;font-size:1.2rem;}
+    .footer-brand span{color:var(--red);font-style:italic;}
+    .footer-copy{font-size:0.75rem;letter-spacing:0.08em;color:rgba(245,240,232,0.3);text-transform:uppercase;}
+    @media(max-width:600px){.sectors-grid{grid-template-columns:repeat(2,1fr);}.cast-grid{grid-template-columns:1fr;}footer{flex-direction:column;text-align:center;}}
+    @media(max-width:380px){.sectors-grid{grid-template-columns:1fr;}}
   </style>
 </head>
 <body>
 
-  <!-- SPLASH -->
+<div class="lang-bar">
+  <button class="lang-btn active" onclick="setLang('en')">🇬🇧 EN</button>
+  <button class="lang-btn" onclick="setLang('it')">🇮🇹 IT</button>
+  <button class="lang-btn" onclick="setLang('es')">🇪🇸 ES</button>
+  <button class="lang-btn" onclick="setLang('fr')">🇫🇷 FR</button>
+</div>
 
-  <div id="splash" onclick="enterSite()">
-    <img src="IMG_0928.jpeg" alt="Women's Revolt™" />
-    <div class="splash-content">
-      <div class="splash-title">Women's<em>Revolt™</em></div>
-      <div class="splash-sub">La Rivolta delle Donne</div>
-      <div class="tap-hint">✦ Tocca per entrare ✦</div>
-    </div>
-  </div>
-
-  <!-- MAIN -->
-
-  <div id="main">
-    <nav>
-      <div class="nav-brand">Women's <span>Revolt</span>™</div>
-      <div class="nav-tag">La Rivolta delle Donne</div>
-    </nav>
-
-```
-<!-- HERO -->
-<section class="hero-section">
-  <div class="section">
-    <div class="section-label">Il Progetto</div>
-    <div class="slogan-big">Her Silence Was The Last Warning</div>
-    <h2>Un universo<br>in <em>espansione.</em></h2>
-    <p class="body-text">Women's Revolt™ nasce come serie letteraria dopo oltre 20 anni di sviluppo. Oggi è molto di più: un brand globale che attraversa editoria, televisione, animazione, moda, sport, cinema, viaggi, gaming e startup. Un movimento culturale con una voce unica.</p>
-    <p class="body-text">Pubblicato da Micronos Ltd, distribuito in tutto il mondo, con pieno controllo creativo e proprietà intellettuale.</p>
-  </div>
-</section>
-
-<div class="red-bar"></div>
-
-<!-- SECTORS -->
-<div class="sectors-bg">
-  <div class="sectors-inner">
-    <div class="section-label">I Settori</div>
-    <h2>Il mondo di<br><em>Women's Revolt™</em></h2>
-    <div class="sectors-grid">
-      <div class="sector-card">
-        <div class="sector-icon">📚</div>
-        <div class="sector-title">Editoria</div>
-        <div class="sector-desc">Serie di romanzi in italiano e inglese. 3 volumi, distribuiti globalmente via PublishDrive.</div>
-      </div>
-      <div class="sector-card">
-        <div class="sector-icon">📺</div>
-        <div class="sector-title">Televisione</div>
-        <div class="sector-desc">Serie TV prestige in sviluppo. Cast visionario internazionale. Controllo creativo totale.</div>
-      </div>
-      <div class="sector-card">
-        <div class="sector-icon">🎨</div>
-        <div class="sector-title">Animazione</div>
-        <div class="sector-desc">Serie animata per tutte le età. Ambientata a Los Angeles. Ispirata a Encanto e Avatar.</div>
-      </div>
-      <div class="sector-card">
-        <div class="sector-icon">👗</div>
-        <div class="sector-title">Moda & Fashion</div>
-        <div class="sector-desc">Collezioni capsule, collaborazioni con designer, merchandising e lifestyle brand.</div>
-      </div>
-      <div class="sector-card">
-        <div class="sector-icon">🎮</div>
-        <div class="sector-title">Videogiochi</div>
-        <div class="sector-desc">Gaming experience nell'universo Women's Revolt™. Personaggi, storie, mondi interattivi.</div>
-      </div>
-      <div class="sector-card">
-        <div class="sector-icon">✈️</div>
-        <div class="sector-title">Viaggi</div>
-        <div class="sector-desc">Esperienze di viaggio tematiche. Itinerari culturali legati al brand e alla narrativa.</div>
-      </div>
-      <div class="sector-card">
-        <div class="sector-icon">🎬</div>
-        <div class="sector-title">Cinema</div>
-        <div class="sector-desc">Produzioni cinematografiche, cortometraggi, documentari e contenuti originali.</div>
-      </div>
-      <div class="sector-card">
-        <div class="sector-icon">⚽</div>
-        <div class="sector-title">Sport</div>
-        <div class="sector-desc">Partnership sportive, sponsorizzazioni e promozione dell'empowerment femminile nello sport.</div>
-      </div>
-      <div class="sector-card">
-        <div class="sector-icon">🚀</div>
-        <div class="sector-title">Startup</div>
-        <div class="sector-desc">Ecosistema imprenditoriale. Investimenti e collaborazioni con startup guidate da donne.</div>
-      </div>
-    </div>
+<div id="splash" onclick="enterSite()">
+  <img src="IMG_0928.jpeg" alt="Women's Revolt" />
+  <div class="splash-content">
+    <div class="splash-title">Women's<em>Revolt™</em></div>
+    <div class="splash-sub" id="splash-sub">La Rivolta delle Donne</div>
+    <div class="tap-hint" id="tap-hint">✦ TAP TO ENTER ✦</div>
   </div>
 </div>
 
-<div class="red-bar"></div>
+<div id="main">
+  <nav>
+    <div class="nav-brand">Women's <span>Revolt</span>™</div>
+    <div class="nav-tag" id="nav-tag">La Rivolta delle Donne</div>
+  </nav>
 
-<!-- BOOKS -->
-<section class="section">
-  <div class="section-label">La Serie Letteraria</div>
-  <h2>I <em>Romanzi</em></h2>
-  <p class="body-text">Cinque donne. Una decisione. Un mondo che cambia per sempre. La serie Women's Revolt™ esplora temi di solidarietà, tradimento, coraggio e conseguenze — ambientata tra America ed Europa, dal 2018 al 2028.</p>
-  <div class="book-list">
-    <div class="book-item">
-      <div class="book-vol">Volume I</div>
-      <div class="book-name">Women's Revolt™</div>
-      <div class="book-note">Disponibile in italiano e inglese · PublishDrive</div>
+  <section class="hero-section">
+    <div class="section">
+      <div class="section-label" id="label-project">The Project</div>
+      <div class="slogan-big">Her Silence Was The Last Warning</div>
+      <h2 id="hero-title">A universe<br>in <em>expansion.</em></h2>
+      <p class="body-text" id="hero-text1">Women's Revolt™ was born as a literary series after more than 20 years of development. Today it is much more: a global brand spanning publishing, television, animation, fashion, sport, cinema, travel, gaming and startups.</p>
+      <p class="body-text" id="hero-text2">Published by Micronos Ltd, distributed worldwide, with full creative control and intellectual property ownership.</p>
     </div>
-    <div class="book-item">
-      <div class="book-vol">Volume II</div>
-      <div class="book-name">The Aftermath — L'Anno Dopo</div>
-      <div class="book-note">In arrivo · Ambientato nel 2019</div>
-    </div>
-    <div class="book-item">
-      <div class="book-vol">Volume III</div>
-      <div class="book-name">The Final Revolt</div>
-      <div class="book-note">In arrivo · America 2028 · Lo smantellamento finale</div>
-    </div>
-  </div>
-</section>
+  </section>
 
-<div class="red-bar"></div>
+  <div class="red-bar"></div>
 
-<!-- TV -->
-<section class="section">
-  <div class="section-label">La Serie Televisiva</div>
-  <h2>Women's Revolt™<br><em>on Screen</em></h2>
-  <p class="body-text">Una produzione prestige con pieno controllo creativo. La visione di casting per la serie televisiva:</p>
-  <div class="cast-grid">
-    <div class="cast-item"><span class="cast-actor">Viola Davis</span><span class="cast-role">Jenny</span></div>
-    <div class="cast-item"><span class="cast-actor">Kerry Washington</span><span class="cast-role">Brenda</span></div>
-    <div class="cast-item"><span class="cast-actor">Sandra Oh</span><span class="cast-role">Shane</span></div>
-    <div class="cast-item"><span class="cast-actor">Emma Stone</span><span class="cast-role">Lindsay</span></div>
-    <div class="cast-item"><span class="cast-actor">Meryl Streep</span><span class="cast-role">Janet Moody</span></div>
-    <div class="cast-item"><span class="cast-actor">Reese Witherspoon</span><span class="cast-role">Betty Langston</span></div>
-  </div>
-</section>
-
-<!-- ANIMATION -->
-<div class="anim-section">
-  <div class="anim-inner">
-    <div class="section-label">Serie Animata</div>
-    <h2>Women's Revolt™<br><em>Animated</em></h2>
-    <p class="body-text">Una serie animata per tutte le età, ambientata a Los Angeles. Ispirata a Encanto e Avatar: The Last Airbender. Depositata in 171 paesi tramite Proofy, disponibile in italiano, inglese e francese.</p>
-    <div class="characters">
-      <div class="char-tag">Maya</div>
-      <div class="char-tag">Kai</div>
-      <div class="char-tag">Luna</div>
-      <div class="char-tag">Lily</div>
-      <div class="char-tag">Ms. Rivera</div>
+  <div class="sectors-bg">
+    <div class="sectors-inner">
+      <div class="section-label" id="label-sectors">The Sectors</div>
+      <h2 id="sectors-title">The world of<br><em>Women's Revolt™</em></h2>
+      <div class="sectors-grid">
+        <div class="sector-card"><div class="sector-icon">📚</div><div class="sector-title" id="s1t">Publishing</div><div class="sector-desc" id="s1d">Novel series in Italian and English. 3 volumes, distributed globally via PublishDrive.</div></div>
+        <div class="sector-card"><div class="sector-icon">📺</div><div class="sector-title" id="s2t">Television</div><div class="sector-desc" id="s2d">Prestige TV series in development. International cast. Full creative control.</div></div>
+        <div class="sector-card"><div class="sector-icon">🎨</div><div class="sector-title" id="s3t">Animation</div><div class="sector-desc" id="s3d">Animated series for all ages. Set in Los Angeles. Inspired by Encanto and Avatar.</div></div>
+        <div class="sector-card"><div class="sector-icon">👗</div><div class="sector-title" id="s4t">Fashion</div><div class="sector-desc" id="s4d">Capsule collections, designer collaborations, merchandise and lifestyle brand.</div></div>
+        <div class="sector-card"><div class="sector-icon">🎮</div><div class="sector-title" id="s5t">Gaming</div><div class="sector-desc" id="s5d">Gaming experience in the Women's Revolt universe. Characters, stories, interactive worlds.</div></div>
+        <div class="sector-card"><div class="sector-icon">✈️</div><div class="sector-title" id="s6t">Travel</div><div class="sector-desc" id="s6d">Themed travel experiences. Cultural itineraries linked to the brand and narrative.</div></div>
+        <div class="sector-card"><div class="sector-icon">🎬</div><div class="sector-title" id="s7t">Cinema</div><div class="sector-desc" id="s7d">Film productions, short films, documentaries and original content.</div></div>
+        <div class="sector-card"><div class="sector-icon">⚽</div><div class="sector-title" id="s8t">Sport</div><div class="sector-desc" id="s8d">Sports partnerships and promotion of women's empowerment in sport.</div></div>
+        <div class="sector-card"><div class="sector-icon">🚀</div><div class="sector-title" id="s9t">Startup</div><div class="sector-desc" id="s9d">Entrepreneurial ecosystem. Investments with women-led startups.</div></div>
+      </div>
     </div>
   </div>
+
+  <div class="red-bar"></div>
+
+  <section class="section">
+    <div class="section-label" id="label-books">The Literary Series</div>
+    <h2 id="books-title">The <em>Novels</em></h2>
+    <p class="body-text" id="books-text">Five women. One decision. A world that changes forever.</p>
+    <div class="book-list">
+      <div class="book-item"><div class="book-vol">Volume I</div><div class="book-name">Women's Revolt™</div><div class="book-note" id="b1n">Available in Italian and English · PublishDrive</div></div>
+      <div class="book-item"><div class="book-vol">Volume II</div><div class="book-name">The Aftermath</div><div class="book-note" id="b2n">Coming soon · Set in 2019</div></div>
+      <div class="book-item"><div class="book-vol">Volume III</div><div class="book-name">The Final Revolt</div><div class="book-note" id="b3n">Coming soon · America 2028</div></div>
+    </div>
+  </section>
+
+  <div class="red-bar"></div>
+
+  <section class="section">
+    <div class="section-label" id="label-tv">The TV Series</div>
+    <h2 id="tv-title">Women's Revolt™<br><em>on Screen</em></h2>
+    <p class="body-text" id="tv-text">A prestige production with full creative control. The casting vision:</p>
+    <div class="cast-grid">
+      <div class="cast-item"><span class="cast-actor">Viola Davis</span><span class="cast-role">Jenny</span></div>
+      <div class="cast-item"><span class="cast-actor">Kerry Washington</span><span class="cast-role">Brenda</span></div>
+      <div class="cast-item"><span class="cast-actor">Sandra Oh</span><span class="cast-role">Shane</span></div>
+      <div class="cast-item"><span class="cast-actor">Emma Stone</span><span class="cast-role">Lindsay</span></div>
+      <div class="cast-item"><span class="cast-actor">Meryl Streep</span><span class="cast-role">Janet Moody</span></div>
+      <div class="cast-item"><span class="cast-actor">Reese Witherspoon</span><span class="cast-role">Betty Langston</span></div>
+    </div>
+  </section>
+
+  <div class="anim-section">
+    <div class="anim-inner">
+      <div class="section-label" id="label-anim">Animated Series</div>
+      <h2 id="anim-title">Women's Revolt™<br><em>Animated</em></h2>
+      <p class="body-text" id="anim-text">An animated series for all ages, set in Los Angeles. Deposited in 171 countries.</p>
+      <div class="characters">
+        <div class="char-tag">Maya</div><div class="char-tag">Kai</div><div class="char-tag">Luna</div><div class="char-tag">Lily</div><div class="char-tag">Ms. Rivera</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="foundation-section">
+    <div class="foundation-inner">
+      <div class="section-label" style="justify-content:center;" id="label-found">The Foundation</div>
+      <div class="percent">10%</div>
+      <h2 id="found-title">Women's Revolt™<br><em>Foundation</em></h2>
+      <p class="body-text" id="found-text">10% of all project revenues goes to the Women's Revolt Foundation — supporting women in need.</p>
+    </div>
+  </div>
+
+  <section class="support-section">
+    <div class="support-inner">
+      <div class="section-label" style="justify-content:center;" id="label-support">Support the Project</div>
+      <h2 id="support-title">Join the<br><em>Revolt</em></h2>
+      <p class="body-text" id="support-text">Women's Revolt™ is an independent project. Your support contributes directly to content creation and global distribution.</p>
+      <div>
+        <a href="https://ko-fi.com" class="btn btn-primary" target="_blank" id="btn-kofi">Support on Ko-fi</a>
+        <a href="mailto:info@micronos.co.uk" class="btn btn-outline" id="btn-collab">Collaborate with us</a>
+      </div>
+      <div class="social-row">
+        <a href="#" class="social-link">𝕏 Twitter</a>
+        <a href="#" class="social-link">▶ TikTok</a>
+        <a href="#" class="social-link">◈ Instagram</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-brand">Women's <span>Revolt</span>™</div>
+    <div class="footer-copy">© 2025 Micronos Ltd · Venice, Italy · All Rights Reserved</div>
+  </footer>
 </div>
 
-<!-- FOUNDATION -->
-<div class="foundation-section">
-  <div class="foundation-inner">
-    <div class="section-label" style="justify-content:center;">La Fondazione</div>
-    <div class="percent">10%</div>
-    <h2>Women's Revolt™<br><em>Foundation</em></h2>
-    <p class="body-text">Il 10% di tutti i proventi del progetto è destinato alla Women's Revolt Foundation — a supporto delle donne in difficoltà. Un impegno concreto, non solo una promessa.</p>
-  </div>
-</div>
+<script>
+var T = {
+  en: {
+    "splash-sub":"La Rivolta delle Donne",
+    "tap-hint":"✦ TAP TO ENTER ✦",
+    "nav-tag":"La Rivolta delle Donne",
+    "label-project":"The Project",
+    "hero-title":"A universe<br>in <em>expansion.</em>",
+    "hero-text1":"Women's Revolt™ was born as a literary series after more than 20 years of development. Today it is much more: a global brand spanning publishing, television, animation, fashion, sport, cinema, travel, gaming and startups.",
+    "hero-text2":"Published by Micronos Ltd, distributed worldwide, with full creative control and intellectual property ownership.",
+    "label-sectors":"The Sectors",
+    "sectors-title":"The world of<br><em>Women's Revolt™</em>",
+    "s1t":"Publishing","s1d":"Novel series in Italian and English. 3 volumes, distributed globally via PublishDrive.",
+    "s2t":"Television","s2d":"Prestige TV series in development. International cast. Full creative control.",
+    "s3t":"Animation","s3d":"Animated series for all ages. Set in Los Angeles. Inspired by Encanto and Avatar.",
+    "s4t":"Fashion","s4d":"Capsule collections, designer collaborations, merchandise and lifestyle brand.",
+    "s5t":"Gaming","s5d":"Gaming experience in the Women's Revolt universe. Characters, stories, interactive worlds.",
+    "s6t":"Travel","s6d":"Themed travel experiences. Cultural itineraries linked to the brand and narrative.",
+    "s7t":"Cinema","s7d":"Film productions, short films, documentaries and original content.",
+    "s8t":"Sport","s8d":"Sports partnerships and promotion of women's empowerment in sport.",
+    "s9t":"Startup","s9d":"Entrepreneurial ecosystem. Investments with women-led startups.",
+    "label-books":"The Literary Series",
+    "books-title":"The <em>Novels</em>",
+    "books-text":"Five women. One decision. A world that changes forever.",
+    "b1n":"Available in Italian and English · PublishDrive",
+    "b2n":"Coming soon · Set in 2019",
+    "b3n":"Coming soon · America 2028",
+    "label-tv":"The TV Series",
+    "tv-title":"Women's Revolt™<br><em>on Screen</em>",
+    "tv-text":"A prestige production with full creative control. The casting vision:",
+    "label-anim":"Animated Series",
+    "anim-title":"Women's Revolt™<br><em>Animated</em>",
+    "anim-text":"An animated series for all ages, set in Los Angeles. Deposited in 171 countries.",
+    "label-found":"The Foundation",
+    "found-title":"Women's Revolt™<br><em>Foundation</em>",
+    "found-text":"10% of all project revenues goes to the Women's Revolt Foundation — supporting women in need.",
+    "label-support":"Support the Project",
+    "support-title":"Join the<br><em>Revolt</em>",
+    "support-text":"Women's Revolt™ is an independent project. Your support contributes directly to content creation and global distribution.",
+    "btn-kofi":"Support on Ko-fi",
+    "btn-collab":"Collaborate with us"
+  },
+  it: {
+    "splash-sub":"La Rivolta delle Donne",
+    "tap-hint":"✦ TOCCA PER ENTRARE ✦",
+    "nav-tag":"La Rivolta delle Donne",
+    "label-project":"Il Progetto",
+    "hero-title":"Un universo<br>in <em>espansione.</em>",
+    "hero-text1":"Women's Revolt™ nasce come serie letteraria dopo oltre 20 anni di sviluppo. Oggi è molto di più: un brand globale che attraversa editoria, televisione, animazione, moda, sport, cinema, viaggi, gaming e startup.",
+    "hero-text2":"Pubblicato da Micronos Ltd, distribuito in tutto il mondo, con pieno controllo creativo e proprietà intellettuale.",
+    "label-sectors":"I Settori",
+    "sectors-title":"Il mondo di<br><em>Women's Revolt™</em>",
+    "s1t":"Editoria","s1d":"Serie di romanzi in italiano e inglese. 3 volumi, distribuiti globalmente via PublishDrive.",
+    "s2t":"Televisione","s2d":"Serie TV prestige in sviluppo. Cast internazionale. Controllo creativo totale.",
+    "s3t":"Animazione","s3d":"Serie animata per tutte le età. A Los Angeles. Ispirata a Encanto e Avatar.",
+    "s4t":"Moda","s4d":"Collezioni capsule, collaborazioni con designer, merchandising e lifestyle brand.",
+    "s5t":"Videogiochi","s5d":"Gaming experience nell'universo Women's Revolt. Personaggi, storie, mondi interattivi.",
+    "s6t":"Viaggi","s6d":"Esperienze di viaggio tematiche. Itinerari culturali legati al brand.",
+    "s7t":"Cinema","s7d":"Produzioni cinematografiche, cortometraggi, documentari e contenuti originali.",
+    "s8t":"Sport","s8d":"Partnership sportive e promozione dell'empowerment femminile nello sport.",
+    "s9t":"Startup","s9d":"Ecosistema imprenditoriale. Investimenti con startup guidate da donne.",
+    "label-books":"La Serie Letteraria",
+    "books-title":"I <em>Romanzi</em>",
+    "books-text":"Cinque donne. Una decisione. Un mondo che cambia per sempre.",
+    "b1n":"Disponibile in italiano e inglese · PublishDrive",
+    "b2n":"In arrivo · Ambientato nel 2019",
+    "b3n":"In arrivo · America 2028",
+    "label-tv":"La Serie Televisiva",
+    "tv-title":"Women's Revolt™<br><em>on Screen</em>",
+    "tv-text":"Una produzione prestige con pieno controllo creativo. La visione di casting:",
+    "label-anim":"Serie Animata",
+    "anim-title":"Women's Revolt™<br><em>Animated</em>",
+    "anim-text":"Una serie animata per tutte le età, ambientata a Los Angeles. Depositata in 171 paesi.",
+    "label-found":"La Fondazione",
+    "found-title":"Women's Revolt™<br><em>Foundation</em>",
+    "found-text":"Il 10% di tutti i proventi va alla Women's Revolt Foundation — a supporto delle donne in difficoltà.",
+    "label-support":"Sostieni il Progetto",
+    "support-title":"Unisciti alla<br><em>Rivolta</em>",
+    "support-text":"Women's Revolt™ è un progetto indipendente. Il tuo supporto contribuisce alla creazione di contenuti e alla distribuzione globale.",
+    "btn-kofi":"Supporta su Ko-fi",
+    "btn-collab":"Collabora con noi"
+  },
+  es: {
+    "splash-sub":"La Revuelta de las Mujeres",
+    "tap-hint":"✦ TOCA PARA ENTRAR ✦",
+    "nav-tag":"La Revuelta de las Mujeres",
+    "label-project":"El Proyecto",
+    "hero-title":"Un universo<br>en <em>expansion.</em>",
+    "hero-text1":"Women's Revolt™ nacio como una serie literaria despues de mas de 20 anos de desarrollo. Hoy es mucho mas: una marca global que abarca la editorial, television, animacion, moda, deporte, cine, viajes, gaming y startups.",
+    "hero-text2":"Publicado por Micronos Ltd, distribuido en todo el mundo, con pleno control creativo y propiedad intelectual.",
+    "label-sectors":"Los Sectores",
+    "sectors-title":"El mundo de<br><em>Women's Revolt™</em>",
+    "s1t":"Editorial","s1d":"Serie de novelas en italiano e ingles. 3 volumenes, distribuidos globalmente via PublishDrive.",
+    "s2t":"Television","s2d":"Serie de TV de prestigio en desarrollo. Reparto internacional. Control creativo total.",
+    "s3t":"Animacion","s3d":"Serie animada para todas las edades. En Los Angeles. Inspirada en Encanto y Avatar.",
+    "s4t":"Moda","s4d":"Colecciones capsula, colaboraciones con disenadores, merchandising y marca lifestyle.",
+    "s5t":"Videojuegos","s5d":"Experiencia gaming en el universo Women's Revolt. Personajes, historias, mundos interactivos.",
+    "s6t":"Viajes","s6d":"Experiencias de viaje tematicas. Itinerarios culturales vinculados a la marca.",
+    "s7t":"Cine","s7d":"Producciones cinematograficas, cortometrajes, documentales y contenidos originales.",
+    "s8t":"Deporte","s8d":"Asociaciones deportivas y promocion del empoderamiento femenino en el deporte.",
+    "s9t":"Startup","s9d":"Ecosistema emprendedor. Inversiones con startups lideradas por mujeres.",
+    "label-books":"La Serie Literaria",
+    "books-title":"Las <em>Novelas</em>",
+    "books-text":"Cinco mujeres. Una decision. Un mundo que cambia para siempre.",
+    "b1n":"Disponible en italiano e ingles · PublishDrive",
+    "b2n":"Proximamente · Ambientada en 2019",
+    "b3n":"Proximamente · America 2028",
+    "label-tv":"La Serie de Television",
+    "tv-title":"Women's Revolt™<br><em>en Pantalla</em>",
+    "tv-text":"Una produccion de prestigio con pleno control creativo. La vision del reparto:",
+    "label-anim":"Serie Animada",
+    "anim-title":"Women's Revolt™<br><em>Animada</em>",
+    "anim-text":"Una serie animada para todas las edades, en Los Angeles. Depositada en 171 paises.",
+    "label-found":"La Fundacion",
+    "found-title":"Women's Revolt™<br><em>Fundacion</em>",
+    "found-text":"El 10% de todos los ingresos va a la Fundacion Women's Revolt — apoyando a mujeres necesitadas.",
+    "label-support":"Apoya el Proyecto",
+    "support-title":"Unete a la<br><em>Revuelta</em>",
+    "support-text":"Women's Revolt™ es un proyecto independiente. Tu apoyo contribuye a la creacion de contenidos y distribucion global.",
+    "btn-kofi":"Apoya en Ko-fi",
+    "btn-collab":"Colabora con nosotros"
+  },
+  fr: {
+    "splash-sub":"La Revolte des Femmes",
+    "tap-hint":"✦ TOUCHEZ POUR ENTRER ✦",
+    "nav-tag":"La Revolte des Femmes",
+    "label-project":"Le Projet",
+    "hero-title":"Un univers<br>en <em>expansion.</em>",
+    "hero-text1":"Women's Revolt™ est ne comme une serie litteraire apres plus de 20 ans de developpement. Aujourd'hui c'est bien plus : une marque mondiale couvrant l'edition, la television, l'animation, la mode, le sport, le cinema, les voyages, le gaming et les startups.",
+    "hero-text2":"Publie par Micronos Ltd, distribue dans le monde entier, avec un controle creatif total et la propriete intellectuelle.",
+    "label-sectors":"Les Secteurs",
+    "sectors-title":"Le monde de<br><em>Women's Revolt™</em>",
+    "s1t":"Edition","s1d":"Serie de romans en italien et en anglais. 3 volumes, distribues mondialement via PublishDrive.",
+    "s2t":"Television","s2d":"Serie TV de prestige en developpement. Distribution internationale. Controle creatif total.",
+    "s3t":"Animation","s3d":"Serie animee pour tous les ages. A Los Angeles. Inspiree d'Encanto et Avatar.",
+    "s4t":"Mode","s4d":"Collections capsule, collaborations avec des createurs, merchandising et marque lifestyle.",
+    "s5t":"Jeux video","s5d":"Experience gaming dans l'univers Women's Revolt. Personnages, histoires, mondes interactifs.",
+    "s6t":"Voyages","s6d":"Experiences de voyage thematiques. Itineraires culturels lies a la marque.",
+    "s7t":"Cinema","s7d":"Productions cinematographiques, courts metrages, documentaires et contenus originaux.",
+    "s8t":"Sport","s8d":"Partenariats sportifs et promotion de l'autonomisation des femmes dans le sport.",
+    "s9t":"Startup","s9d":"Ecosysteme entrepreneurial. Investissements avec des startups dirigees par des femmes.",
+    "label-books":"La Serie Litteraire",
+    "books-title":"Les <em>Romans</em>",
+    "books-text":"Cinq femmes. Une decision. Un monde qui change pour toujours.",
+    "b1n":"Disponible en italien et en anglais · PublishDrive",
+    "b2n":"Bientot disponible · Situe en 2019",
+    "b3n":"Bientot disponible · Amerique 2028",
+    "label-tv":"La Serie Televisee",
+    "tv-title":"Women's Revolt™<br><em>a l'Ecran</em>",
+    "tv-text":"Une production de prestige avec un controle creatif total. La vision du casting :",
+    "label-anim":"Serie Animee",
+    "anim-title":"Women's Revolt™<br><em>Animee</em>",
+    "anim-text":"Une serie animee pour tous les ages, a Los Angeles. Deposee dans 171 pays.",
+    "label-found":"La Fondation",
+    "found-title":"Women's Revolt™<br><em>Fondation</em>",
+    "found-text":"10% de tous les revenus va a la Fondation Women's Revolt — soutenant les femmes dans le besoin.",
+    "label-support":"Soutenir le Projet",
+    "support-title":"Rejoignez la<br><em>Revolte</em>",
+    "support-text":"Women's Revolt™ est un projet independant. Votre soutien contribue a la creation de contenu et a la distribution mondiale.",
+    "btn-kofi":"Soutenir sur Ko-fi",
+    "btn-collab":"Collaborer avec nous"
+  }
+};
 
-<!-- SUPPORT -->
-<section class="support-section">
-  <div class="support-inner">
-    <div class="section-label" style="justify-content:center;">Sostieni il Progetto</div>
-    <h2>Unisciti alla<br><em>Rivolta</em></h2>
-    <p class="body-text">Women's Revolt™ è un progetto indipendente. Il tuo supporto contribuisce direttamente alla creazione di contenuti, alla distribuzione globale e alla fondazione.</p>
-    <div>
-      <a href="https://ko-fi.com" class="btn btn-primary" target="_blank">Supporta su Ko-fi</a>
-      <a href="mailto:info@micronos.co.uk" class="btn btn-outline">Collabora con noi</a>
-    </div>
-    <div class="social-row" style="margin-top:3rem;">
-      <a href="#" class="social-link">𝕏 Twitter</a>
-      <a href="#" class="social-link">▶ TikTok</a>
-      <a href="#" class="social-link">◈ Instagram</a>
-    </div>
-  </div>
-</section>
+function setLang(lang) {
+  var t = T[lang];
+  for (var id in t) {
+    var el = document.getElementById(id);
+    if (el) el.innerHTML = t[id];
+  }
+  var btns = document.querySelectorAll('.lang-btn');
+  for (var i = 0; i < btns.length; i++) btns[i].classList.remove('active');
+  document.querySelector('.lang-btn[onclick="setLang(\'' + lang + '\')"]').classList.add('active');
+}
 
-<footer>
-  <div class="footer-brand">Women's <span>Revolt</span>™</div>
-  <div class="footer-copy">© 2025 Micronos Ltd · Venezia, Italia · Tutti i diritti riservati</div>
-</footer>
-```
+function enterSite() {
+  document.getElementById('splash').classList.add('hidden');
+  document.getElementById('main').classList.add('visible');
+  document.body.style.overflow = 'auto';
+  setTimeout(function() { document.getElementById('splash').style.display = 'none'; }, 900);
+}
 
-  </div>
-
-  <script>
-    function enterSite() {
-      document.getElementById('splash').classList.add('hidden');
-      document.getElementById('main').classList.add('visible');
-      document.body.style.overflow = 'auto';
-      setTimeout(() => {
-        document.getElementById('splash').style.display = 'none';
-      }, 900);
-    }
-    document.body.style.overflow = 'hidden';
-  </script>
+document.body.style.overflow = 'hidden';
+</script>
 
 </body>
 </html>
