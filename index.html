@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Women's Revolt™ — La Rivolta delle Donne</title>
+  <meta name="description" content="Women's Revolt™ — La Rivolta delle Donne. A story that could not stay silent."/>
+  <meta property="og:title" content="Women's Revolt™"/>
+  <meta property="og:description" content="Her Silence Was The Last Warning."/>
+  <meta property="og:type" content="website"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Bebas+Neue&display=swap" rel="stylesheet"/>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{--red:#c0152a;--white:#faf8f5}
+    html,body{width:100%;height:100%;overflow:hidden;font-family:'Cormorant Garamond',serif;background:#000;-webkit-tap-highlight-color:transparent}
+    #splash{position:fixed;inset:0;z-index:100;background:#000;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;text-align:center;padding:0 0 80px;cursor:pointer;transition:opacity 1s ease}
+    #splash.out{opacity:0;pointer-events:none}
+    #splash-bg{position:absolute;inset:0;background-image:url('IMG_0928.jpeg');background-size:cover;background-position:center;opacity:0;transition:opacity 1.4s ease}
+    #splash-bg.visible{opacity:1}
+    .splash-content{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center}
+    .splash-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(48px,14vw,110px);color:#fff;line-height:.9;letter-spacing:4px;text-shadow:0 0 60px rgba(192,21,42,.9),0 2px 40px rgba(0,0,0,.8);animation:fadeUp .9s .6s ease both}
+    .splash-sub{font-size:clamp(11px,3vw,14px);letter-spacing:6px;font-style:italic;color:rgba(255,255,255,.7);text-shadow:0 1px 12px rgba(0,0,0,1);margin-top:10px;animation:fadeUp .9s .8s ease both}
+    .splash-line{width:1px;height:50px;background:rgba(255,255,255,.3);margin:32px auto;animation:fadeUp .9s 1s ease both,lineGrow .7s 1s ease both}
+    .splash-tap{font-size:11px;letter-spacing:5px;text-transform:uppercase;color:rgba(255,255,255,.45);text-shadow:0 1px 8px rgba(0,0,0,1);animation:pulse 2.4s 1.5s ease-in-out infinite,fadeUp .9s 1.2s ease both}
+    .splash-tap::before,.splash-tap::after{content:'—';margin:0 10px;opacity:.5}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+    @keyframes lineGrow{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+    @keyframes pulse{0%,100%{opacity:.45}50%{opacity:.9}}
+    #inner{position:fixed;inset:0;z-index:50;background:var(--white);overflow-y:auto;opacity:0;pointer-events:none;transition:opacity 1s .3s ease}
+    #inner.in{opacity:1;pointer-events:all}
+    .inner-header{background:var(--red);padding:22px 32px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:10}
+    .inner-logo{font-family:'Bebas Neue',sans-serif;font-size:clamp(20px,5vw,26px);letter-spacing:4px;color:var(--white)}
+    .inner-logo span{opacity:.5}
+    .inner-nav{display:flex;gap:24px}
+    .inner-nav a{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.55);text-decoration:none;transition:color .2s}
+    .inner-nav a:hover{color:var(--white)}
+    .hero{background:var(--red);padding:clamp(60px,12vw,120px) 32px clamp(80px,15vw,160px);text-align:center;position:relative;overflow:hidden}
+    .hero::after{content:'';position:absolute;bottom:-1px;left:0;right:0;height:80px;background:var(--white);clip-path:ellipse(55% 100% at 50% 100%)}
+    .hero-sub{font-size:12px;letter-spacing:6px;text-transform:uppercase;font-style:italic;color:rgba(255,255,255,.5);margin-bottom:20px}
+    .hero-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(60px,20vw,160px);line-height:.88;color:var(--white);letter-spacing:4px}
+    .hero-quote{margin-top:40px;font-size:clamp(16px,4vw,26px);font-style:italic;font-weight:300;color:rgba(255,255,255,.8);max-width:480px;margin-left:auto;margin-right:auto;line-height:1.5}
+    .section{padding:clamp(60px,10vw,100px) clamp(24px,6vw,80px);max-width:900px;margin:0 auto}
+    .section-label{font-size:11px;letter-spacing:5px;text-transform:uppercase;color:var(--red);margin-bottom:20px}
+    .section-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(36px,8vw,64px);letter-spacing:3px;color:#1a0608;line-height:1;margin-bottom:28px}
+    .section-body{font-size:clamp(16px,2.5vw,20px);font-weight:300;line-height:1.75;color:#3a1a1e}
+    .section-body em{font-style:italic;color:var(--red)}
+    .divider{width:60px;height:2px;background:var(--red);margin:0 0 28px}
+    .volumes{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:2px;background:#e8ddd8}
+    .vol{background:var(--white);padding:40px 32px}
+    .vol-num{font-family:'Bebas Neue',sans-serif;font-size:64px;color:rgba(192,21,42,.12);line-height:1;margin-bottom:12px}
+    .vol-title{font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--red);margin-bottom:10px}
+    .vol-desc{font-size:15px;font-weight:300;line-height:1.65;color:#5a2a30}
+    .vol-tag{display:inline-block;margin-top:16px;font-size:10px;letter-spacing:3px;text-transform:uppercase;padding:6px 14px;border:1px solid rgba(192,21,42,.3);color:var(--red)}
+    .band{background:var(--red);padding:clamp(60px,10vw,100px) clamp(24px,6vw,80px);text-align:center}
+    .band-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(32px,7vw,56px);letter-spacing:3px;color:var(--white);margin-bottom:20px}
+    .band-body{font-size:clamp(15px,2.5vw,19px);font-style:italic;font-weight:300;color:rgba(255,255,255,.75);max-width:540px;margin:0 auto 48px;line-height:1.7}
+    .btns{display:flex;flex-direction:column;gap:14px;align-items:center}
+    .btn{display:inline-block;padding:18px 48px;font-family:'Cormorant Garamond',serif;font-size:13px;letter-spacing:4px;text-transform:uppercase;text-decoration:none;transition:all .25s ease;min-width:260px;text-align:center}
+    .btn-white{background:var(--white);color:var(--red);border:1px solid var(--white)}
+    .btn-white:hover{background:transparent;color:var(--white)}
+    .btn-outline{background:transparent;color:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.35)}
+    .btn-outline:hover{border-color:var(--white);color:var(--white)}
+    .footer-inner{background:#1a0608;padding:40px 32px;text-align:center}
+    .soc{display:flex;gap:32px;justify-content:center;margin-bottom:32px}
+    .soc a{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.35);text-decoration:none;transition:color .2s}
+    .soc a:hover{color:rgba(255,255,255,.8)}
+    .foot{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.18)}
+  </style>
+</head>
+<body>
+  <div id="splash" onclick="enter()" role="button" aria-label="Enter the site">
+    <div id="splash-bg"></div>
+    <div class="splash-content">
+      <div class="splash-title">Women's<br>Revolt™</div>
+      <div class="splash-sub">La Rivolta delle Donne</div>
+      <div class="splash-line"></div>
+      <div class="splash-tap">Touch to enter</div>
+    </div>
+  </div>
+  <div id="inner">
+    <header class="inner-header">
+      <div class="inner-logo">Women<span>'</span>s Revolt™</div>
+      <nav class="inner-nav">
+        <a href="https://ko-fi.com/womensrevolt" target="_blank">Support</a>
+        <a href="mailto:info@micronos.co.uk">Contact</a>
+      </nav>
+    </header>
+    <section class="hero">
+      <div class="hero-sub">La Rivolta delle Donne — Vol. I–III</div>
+      <div class="hero-title">Women's<br>Revolt™</div>
+      <div class="hero-quote">A story twenty years in the making. A world that could no longer stay silent.</div>
+    </section>
+    <section class="section">
+      <div class="section-label">The Story</div>
+      <div class="divider"></div>
+      <div class="section-title">They Were Done Waiting</div>
+      <div class="section-body">Five women. Five lives fractured by the same invisible architecture of control. <em>Women's Revolt™</em> is a novel series set between Italy and America — a story of escape, solidarity, and the slow, irreversible dismantling of everything that held them in place.<br><br>Written in Italian and English. Published independently. Built to last.</div>
+    </section>
+    <div class="volumes">
+      <div class="vol"><div class="vol-num">I</div><div class="vol-title">Volume One</div><div class="vol-desc">The escape. Five women. One night that changes everything.</div><div class="vol-tag">Available now</div></div>
+      <div class="vol"><div class="vol-num">II</div><div class="vol-title">Volume Two</div><div class="vol-desc">One year after. Building a life on the other side of silence.</div><div class="vol-tag">In development</div></div>
+      <div class="vol"><div class="vol-num">III</div><div class="vol-title">Volume Three</div><div class="vol-desc">America, 2028. The final reckoning with the systems that built the cage.</div><div class="vol-tag">Completed</div></div>
+    </div>
+    <div class="band">
+      <div class="band-title">Support the Revolt</div>
+      <div class="band-body">An independent project. No publisher. No compromise. If this story matters to you — help it reach the world.</div>
+      <div class="btns">
+        <a href="https://ko-fi.com/womensrevolt" class="btn btn-white" target="_blank">Support on Ko-fi</a>
+        <a href="mailto:info@micronos.co.uk" class="btn btn-outline">Get in Touch</a>
+      </div>
+    </div>
+    <footer class="footer-inner">
+      <div class="soc">
+        <a href="https://x.com/JamesBlackq22a" target="_blank">𝕏 Twitter</a>
+        <a href="https://instagram.com/womensrevolt" target="_blank">Instagram</a>
+        <a href="https://tiktok.com/@womensrevolt" target="_blank">TikTok</a>
+      </div>
+      <div class="foot">© 2026 Micronos Ltd · Venice, Italy · Women's Revolt™ is a trademark</div>
+    </footer>
+  </div>
+  <script>
+    setTimeout(() => document.getElementById('splash-bg').classList.add('visible'), 100);
+    function enter() {
+      document.getElementById('splash').classList.add('out');
+      setTimeout(() => { document.getElementById('inner').classList.add('in'); document.body.style.overflow = ''; }, 400);
+      setTimeout(() => { document.getElementById('splash').style.display = 'none'; }, 1400);
+    }
+    document.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') enter(); });
+  </script>
+</body>
+</html>
