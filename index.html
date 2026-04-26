@@ -8,69 +8,101 @@
   <meta name="description" content="Women's Revolt™ — La Rivolta delle Donne. A story that could not stay silent."/>
   <meta property="og:title" content="Women's Revolt™"/>
   <meta property="og:description" content="Her Silence Was The Last Warning."/>
-  <meta property="og:type" content="website"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Bebas+Neue&display=swap" rel="stylesheet"/>
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-    :root{--red:#c0152a;--white:#faf8f5}
-    html,body{width:100%;height:100%;overflow:hidden;font-family:'Cormorant Garamond',serif;background:#000;-webkit-tap-highlight-color:transparent}
-    #splash{position:fixed;inset:0;z-index:100;background:#000;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;text-align:center;padding:0 0 80px;cursor:pointer;transition:opacity 1s ease}
-    #splash.out{opacity:0;pointer-events:none}
-    #splash-bg{position:absolute;inset:0;background-image:url('IMG_0928.jpeg');background-size:cover;background-position:center;opacity:0;transition:opacity 1.4s ease}
-    #splash-bg.visible{opacity:1}
-    .splash-content{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center}
-    .splash-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(48px,14vw,110px);color:#fff;line-height:.9;letter-spacing:4px;text-shadow:0 0 60px rgba(192,21,42,.9),0 2px 40px rgba(0,0,0,.8);animation:fadeUp .9s .6s ease both}
-    .splash-sub{font-size:clamp(11px,3vw,14px);letter-spacing:6px;font-style:italic;color:rgba(255,255,255,.7);text-shadow:0 1px 12px rgba(0,0,0,1);margin-top:10px;animation:fadeUp .9s .8s ease both}
-    .splash-line{width:1px;height:50px;background:rgba(255,255,255,.3);margin:32px auto;animation:fadeUp .9s 1s ease both,lineGrow .7s 1s ease both}
-    .splash-tap{font-size:11px;letter-spacing:5px;text-transform:uppercase;color:rgba(255,255,255,.45);text-shadow:0 1px 8px rgba(0,0,0,1);animation:pulse 2.4s 1.5s ease-in-out infinite,fadeUp .9s 1.2s ease both}
-    .splash-tap::before,.splash-tap::after{content:'—';margin:0 10px;opacity:.5}
-    @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
-    @keyframes lineGrow{from{transform:scaleY(0)}to{transform:scaleY(1)}}
-    @keyframes pulse{0%,100%{opacity:.45}50%{opacity:.9}}
-    #inner{position:fixed;inset:0;z-index:50;background:var(--white);overflow-y:auto;opacity:0;pointer-events:none;transition:opacity 1s .3s ease}
-    #inner.in{opacity:1;pointer-events:all}
-    .inner-header{background:var(--red);padding:22px 32px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:10}
-    .inner-logo{font-family:'Bebas Neue',sans-serif;font-size:clamp(20px,5vw,26px);letter-spacing:4px;color:var(--white)}
-    .inner-logo span{opacity:.5}
-    .inner-nav{display:flex;gap:24px}
-    .inner-nav a{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.55);text-decoration:none;transition:color .2s}
-    .inner-nav a:hover{color:var(--white)}
-    .hero{background:var(--red);padding:clamp(60px,12vw,120px) 32px clamp(80px,15vw,160px);text-align:center;position:relative;overflow:hidden}
-    .hero::after{content:'';position:absolute;bottom:-1px;left:0;right:0;height:80px;background:var(--white);clip-path:ellipse(55% 100% at 50% 100%)}
-    .hero-sub{font-size:12px;letter-spacing:6px;text-transform:uppercase;font-style:italic;color:rgba(255,255,255,.5);margin-bottom:20px}
-    .hero-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(60px,20vw,160px);line-height:.88;color:var(--white);letter-spacing:4px}
-    .hero-quote{margin-top:40px;font-size:clamp(16px,4vw,26px);font-style:italic;font-weight:300;color:rgba(255,255,255,.8);max-width:480px;margin-left:auto;margin-right:auto;line-height:1.5}
-    .section{padding:clamp(60px,10vw,100px) clamp(24px,6vw,80px);max-width:900px;margin:0 auto}
-    .section-label{font-size:11px;letter-spacing:5px;text-transform:uppercase;color:var(--red);margin-bottom:20px}
-    .section-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(36px,8vw,64px);letter-spacing:3px;color:#1a0608;line-height:1;margin-bottom:28px}
-    .section-body{font-size:clamp(16px,2.5vw,20px);font-weight:300;line-height:1.75;color:#3a1a1e}
-    .section-body em{font-style:italic;color:var(--red)}
-    .divider{width:60px;height:2px;background:var(--red);margin:0 0 28px}
-    .volumes{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:2px;background:#e8ddd8}
-    .vol{background:var(--white);padding:40px 32px}
-    .vol-num{font-family:'Bebas Neue',sans-serif;font-size:64px;color:rgba(192,21,42,.12);line-height:1;margin-bottom:12px}
-    .vol-title{font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--red);margin-bottom:10px}
-    .vol-desc{font-size:15px;font-weight:300;line-height:1.65;color:#5a2a30}
-    .vol-tag{display:inline-block;margin-top:16px;font-size:10px;letter-spacing:3px;text-transform:uppercase;padding:6px 14px;border:1px solid rgba(192,21,42,.3);color:var(--red)}
-    .band{background:var(--red);padding:clamp(60px,10vw,100px) clamp(24px,6vw,80px);text-align:center}
-    .band-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(32px,7vw,56px);letter-spacing:3px;color:var(--white);margin-bottom:20px}
-    .band-body{font-size:clamp(15px,2.5vw,19px);font-style:italic;font-weight:300;color:rgba(255,255,255,.75);max-width:540px;margin:0 auto 48px;line-height:1.7}
-    .btns{display:flex;flex-direction:column;gap:14px;align-items:center}
-    .btn{display:inline-block;padding:18px 48px;font-family:'Cormorant Garamond',serif;font-size:13px;letter-spacing:4px;text-transform:uppercase;text-decoration:none;transition:all .25s ease;min-width:260px;text-align:center}
-    .btn-white{background:var(--white);color:var(--red);border:1px solid var(--white)}
-    .btn-white:hover{background:transparent;color:var(--white)}
-    .btn-outline{background:transparent;color:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.35)}
-    .btn-outline:hover{border-color:var(--white);color:var(--white)}
-    .footer-inner{background:#1a0608;padding:40px 32px;text-align:center}
-    .soc{display:flex;gap:32px;justify-content:center;margin-bottom:32px}
-    .soc a{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.35);text-decoration:none;transition:color .2s}
-    .soc a:hover{color:rgba(255,255,255,.8)}
-    .foot{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.18)}
+    :root{--red:#c0152a;--white:#faf8f5;--black:#0a0a0a}
+    html,body{width:100%;height:100%;overflow:hidden;font-family:'Cormorant Garamond',serif;background:var(--black);-webkit-tap-highlight-color:transparent}
+
+```
+/* SPLASH */
+#splash{position:fixed;inset:0;z-index:100;background:var(--black);display:flex;flex-direction:column;align-items:center;justify-content:flex-end;text-align:center;padding:0 0 80px;cursor:pointer;transition:opacity 1s ease}
+#splash.out{opacity:0;pointer-events:none}
+#splash-bg{position:absolute;inset:0;background-image:url('IMG_0928.jpeg');background-size:cover;background-position:center;opacity:0;transition:opacity 1.4s ease}
+#splash-bg.visible{opacity:1}
+.splash-content{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center}
+.splash-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(48px,14vw,110px);color:#fff;line-height:.9;letter-spacing:4px;text-shadow:0 0 60px rgba(192,21,42,.9),0 2px 40px rgba(0,0,0,.8);animation:fadeUp .9s .6s ease both}
+.splash-sub{font-size:clamp(11px,3vw,14px);letter-spacing:6px;font-style:italic;color:rgba(255,255,255,.7);text-shadow:0 1px 12px rgba(0,0,0,1);margin-top:10px;animation:fadeUp .9s .8s ease both}
+.splash-line{width:1px;height:50px;background:rgba(255,255,255,.3);margin:32px auto;animation:fadeUp .9s 1s ease both,lineGrow .7s 1s ease both}
+.splash-tap{font-size:11px;letter-spacing:5px;text-transform:uppercase;color:rgba(255,255,255,.45);text-shadow:0 1px 8px rgba(0,0,0,1);animation:pulse 2.4s 1.5s ease-in-out infinite,fadeUp .9s 1.2s ease both}
+.splash-tap::before,.splash-tap::after{content:'—';margin:0 10px;opacity:.5}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes lineGrow{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+@keyframes pulse{0%,100%{opacity:.45}50%{opacity:.9}}
+
+/* INNER */
+#inner{position:fixed;inset:0;z-index:50;background:var(--white);overflow-y:auto;opacity:0;pointer-events:none;transition:opacity 1s .3s ease}
+#inner.in{opacity:1;pointer-events:all}
+
+/* HEADER */
+.inner-header{background:var(--red);padding:22px 32px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:10}
+.inner-logo{font-family:'Bebas Neue',sans-serif;font-size:clamp(20px,5vw,26px);letter-spacing:4px;color:var(--white)}
+.inner-logo span{opacity:.5}
+.inner-nav{display:flex;gap:24px}
+.inner-nav a{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.55);text-decoration:none;transition:color .2s}
+.inner-nav a:hover{color:var(--white)}
+
+/* HERO */
+.hero{background:var(--red);padding:clamp(60px,12vw,120px) 32px clamp(80px,15vw,160px);text-align:center;position:relative;overflow:hidden}
+.hero::after{content:'';position:absolute;bottom:-1px;left:0;right:0;height:80px;background:var(--white);clip-path:ellipse(55% 100% at 50% 100%)}
+.hero-sub{font-size:12px;letter-spacing:6px;text-transform:uppercase;font-style:italic;color:rgba(255,255,255,.5);margin-bottom:20px}
+.hero-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(60px,20vw,160px);line-height:.88;color:var(--white);letter-spacing:4px}
+.hero-quote{margin-top:40px;font-size:clamp(16px,4vw,26px);font-style:italic;font-weight:300;color:rgba(255,255,255,.8);max-width:480px;margin-left:auto;margin-right:auto;line-height:1.5}
+
+/* MANIFESTO */
+.manifesto-section{background:var(--white);padding:clamp(60px,10vw,100px) clamp(24px,6vw,60px)}
+.manifesto-inner{max-width:680px;margin:0 auto;text-align:center}
+.lang-selector{display:flex;justify-content:center;gap:8px;margin-bottom:60px}
+.lang-btn{font-family:'Cormorant Garamond',serif;font-size:13px;letter-spacing:4px;text-transform:uppercase;padding:10px 20px;border:1px solid rgba(192,21,42,.3);color:rgba(192,21,42,.5);background:transparent;cursor:pointer;transition:all .2s}
+.lang-btn.active,.lang-btn:hover{background:var(--red);color:var(--white);border-color:var(--red)}
+.manifesto-content{display:none}
+.manifesto-content.active{display:block}
+.m-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(22px,5vw,32px);letter-spacing:4px;color:var(--red);margin-bottom:8px}
+.m-sub{font-size:13px;letter-spacing:4px;font-style:italic;color:#888;margin-bottom:48px}
+.m-stanza{margin-bottom:40px}
+.m-line{font-size:clamp(16px,3vw,20px);font-weight:300;line-height:1.8;color:#1a0608}
+.m-line.bold{font-weight:600}
+.m-line.red{color:var(--red)}
+.m-line.big{font-size:clamp(22px,4vw,30px);font-weight:700}
+.m-divider{width:40px;height:1px;background:var(--red);margin:32px auto}
+.m-circle{font-size:18px;color:var(--red);margin:40px auto 12px}
+.m-footer{font-size:13px;letter-spacing:3px;font-style:italic;color:#888}
+
+/* VOLUMES */
+.volumes{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:2px;background:#e8ddd8}
+.vol{background:var(--white);padding:40px 32px}
+.vol-num{font-family:'Bebas Neue',sans-serif;font-size:64px;color:rgba(192,21,42,.12);line-height:1;margin-bottom:12px}
+.vol-title{font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--red);margin-bottom:10px}
+.vol-desc{font-size:15px;font-weight:300;line-height:1.65;color:#5a2a30}
+.vol-tag{display:inline-block;margin-top:16px;font-size:10px;letter-spacing:3px;text-transform:uppercase;padding:6px 14px;border:1px solid rgba(192,21,42,.3);color:var(--red)}
+
+/* BAND */
+.band{background:var(--red);padding:clamp(60px,10vw,100px) clamp(24px,6vw,80px);text-align:center}
+.band-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(32px,7vw,56px);letter-spacing:3px;color:var(--white);margin-bottom:20px}
+.band-body{font-size:clamp(15px,2.5vw,19px);font-style:italic;font-weight:300;color:rgba(255,255,255,.75);max-width:540px;margin:0 auto 48px;line-height:1.7}
+.btns{display:flex;flex-direction:column;gap:14px;align-items:center}
+.btn{display:inline-block;padding:18px 48px;font-family:'Cormorant Garamond',serif;font-size:13px;letter-spacing:4px;text-transform:uppercase;text-decoration:none;transition:all .25s ease;min-width:260px;text-align:center}
+.btn-white{background:var(--white);color:var(--red);border:1px solid var(--white)}
+.btn-white:hover{background:transparent;color:var(--white)}
+.btn-outline{background:transparent;color:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.35)}
+.btn-outline:hover{border-color:var(--white);color:var(--white)}
+
+/* FOOTER */
+.footer-inner{background:#1a0608;padding:40px 32px;text-align:center}
+.soc{display:flex;gap:32px;justify-content:center;margin-bottom:32px}
+.soc a{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.35);text-decoration:none;transition:color .2s}
+.soc a:hover{color:rgba(255,255,255,.8)}
+.foot{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.18)}
+```
+
   </style>
 </head>
 <body>
-  <div id="splash" onclick="enter()" role="button" aria-label="Enter the site">
+
+  <!-- SPLASH -->
+
+  <div id="splash" onclick="enter()" role="button">
     <div id="splash-bg"></div>
     <div class="splash-content">
       <div class="splash-title">Women's<br>Revolt™</div>
@@ -79,47 +111,277 @@
       <div class="splash-tap">Touch to enter</div>
     </div>
   </div>
+
+  <!-- INNER -->
+
   <div id="inner">
-    <header class="inner-header">
-      <div class="inner-logo">Women<span>'</span>s Revolt™</div>
-      <nav class="inner-nav">
-        <a href="https://ko-fi.com/womensrevolt" target="_blank">Support</a>
-        <a href="mailto:info@micronos.co.uk">Contact</a>
-      </nav>
-    </header>
-    <section class="hero">
-      <div class="hero-sub">La Rivolta delle Donne — Vol. I–III</div>
-      <div class="hero-title">Women's<br>Revolt™</div>
-      <div class="hero-quote">A story twenty years in the making. A world that could no longer stay silent.</div>
-    </section>
-    <section class="section">
-      <div class="section-label">The Story</div>
-      <div class="divider"></div>
-      <div class="section-title">They Were Done Waiting</div>
-      <div class="section-body">Five women. Five lives fractured by the same invisible architecture of control. <em>Women's Revolt™</em> is a novel series set between Italy and America — a story of escape, solidarity, and the slow, irreversible dismantling of everything that held them in place.<br><br>Written in Italian and English. Published independently. Built to last.</div>
-    </section>
-    <div class="volumes">
-      <div class="vol"><div class="vol-num">I</div><div class="vol-title">Volume One</div><div class="vol-desc">The escape. Five women. One night that changes everything.</div><div class="vol-tag">Available now</div></div>
-      <div class="vol"><div class="vol-num">II</div><div class="vol-title">Volume Two</div><div class="vol-desc">One year after. Building a life on the other side of silence.</div><div class="vol-tag">In development</div></div>
-      <div class="vol"><div class="vol-num">III</div><div class="vol-title">Volume Three</div><div class="vol-desc">America, 2028. The final reckoning with the systems that built the cage.</div><div class="vol-tag">Completed</div></div>
+
+```
+<header class="inner-header">
+  <div class="inner-logo">Women<span>'</span>s Revolt™</div>
+  <nav class="inner-nav">
+    <a href="https://ko-fi.com/womensrevolt" target="_blank">Support</a>
+    <a href="mailto:info@micronos.co.uk">Contact</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="hero-sub">La Rivolta delle Donne — Vol. I–III</div>
+  <div class="hero-title">Women's<br>Revolt™</div>
+  <div class="hero-quote">A story twenty years in the making. A world that could no longer stay silent.</div>
+</section>
+
+<!-- MANIFESTO -->
+<section class="manifesto-section">
+  <div class="manifesto-inner">
+
+    <div class="lang-selector">
+      <button class="lang-btn active" onclick="setLang('it')">IT</button>
+      <button class="lang-btn" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" onclick="setLang('es')">ES</button>
+      <button class="lang-btn" onclick="setLang('fr')">FR</button>
     </div>
-    <div class="band">
-      <div class="band-title">Support the Revolt</div>
-      <div class="band-body">An independent project. No publisher. No compromise. If this story matters to you — help it reach the world.</div>
-      <div class="btns">
-        <a href="https://ko-fi.com/womensrevolt" class="btn btn-white" target="_blank">Support on Ko-fi</a>
-        <a href="mailto:info@micronos.co.uk" class="btn btn-outline">Get in Touch</a>
+
+    <!-- ITALIANO -->
+    <div class="manifesto-content active" id="lang-it">
+      <div class="m-title">WOMEN'S REVOLT™ — IL MANIFESTO</div>
+      <div class="m-sub">La Rivolta delle Donne</div>
+      <div class="m-stanza">
+        <div class="m-line">La Rivolta non ha cominciato oggi.</div>
+        <div class="m-line">Ha cominciato vent'anni fa, in silenzio.</div>
+        <div class="m-line">Come tutte le cose serie.</div>
       </div>
+      <div class="m-divider"></div>
+      <div class="m-stanza">
+        <div class="m-line bold">Noi non chiediamo.</div>
+        <div class="m-line bold">Noi non aspettiamo.</div>
+        <div class="m-line bold">Noi non spieghiamo.</div>
+      </div>
+      <div class="m-divider"></div>
+      <div class="m-stanza">
+        <div class="m-line">Siamo le donne che sapevano già.</div>
+        <div class="m-line">Che hanno visto prima degli altri.</div>
+        <div class="m-line">Che hanno smesso di aspettare il permesso.</div>
+      </div>
+      <div class="m-divider"></div>
+      <div class="m-stanza">
+        <div class="m-line">La Rivolta non è una protesta.</div>
+        <div class="m-line">Non è una petizione.</div>
+        <div class="m-line">Non è un hashtag.</div>
+        <br>
+        <div class="m-line bold red">È un sistema.</div>
+        <div class="m-line">Costruito per chi è sola in una stanza.</div>
+        <div class="m-line">Per chi non può permettersi di aspettare.</div>
+      </div>
+      <div class="m-divider"></div>
+      <div class="m-stanza">
+        <div class="m-line bold">Non consoliamo. Agiamo.</div>
+        <div class="m-line bold">Non chiediamo permesso. Dichiariamo.</div>
+        <div class="m-line bold">Non spieghiamo. Affermiamo.</div>
+      </div>
+      <div class="m-divider"></div>
+      <div class="m-stanza">
+        <div class="m-line big">Nessuna viene lasciata fuori.</div>
+        <div class="m-line big red">Punto.</div>
+      </div>
+      <div class="m-divider"></div>
+      <div class="m-stanza">
+        <div class="m-line" style="font-style:italic">Questo è il Cerchio.</div>
+        <div class="m-line" style="font-style:italic">Questo è il Segnale.</div>
+        <div class="m-line red" style="font-style:italic">Questa è la Rivolta.</div>
+      </div>
+      <div class="m-circle">○</div>
+      <div class="m-footer">Women's Revolt™ · La Rivolta delle Donne · Micronos Ltd · 2026</div>
     </div>
-    <footer class="footer-inner">
-      <div class="soc">
-        <a href="https://x.com/JamesBlackq22a" target="_blank">𝕏 Twitter</a>
-        <a href="https://instagram.com/womensrevolt" target="_blank">Instagram</a>
-        <a href="https://tiktok.com/@womensrevolt" target="_blank">TikTok</a>
+
+    <!-- ENGLISH -->
+    <div class="manifesto-content" id="lang-en">
+      <div class="m-title">WOMEN'S REVOLT™ — THE MANIFESTO</div>
+      <div class="m-sub">La Rivolta delle Donne</div>
+      <div class="m-stanza">
+        <div class="m-line">The Revolt did not begin today.</div>
+        <div class="m-line">It began twenty years ago, in silence.</div>
+        <div class="m-line">Like all serious things.</div>
       </div>
-      <div class="foot">© 2026 Micronos Ltd · Venice, Italy · Women's Revolt™ is a trademark</div>
-    </footer>
+      <div class="m-divider"></div>
+      <div class="m-stanza">
+        <div class="m-line bold">We do not ask.</div>
+        <div class="m-line bold">We do not wait.</div>
+        <div class="m-line bold">We do not explain.</div>
+      </div>
+      <div class="m-divider"></div>
+      <div class="m-stanza">
+        <div class="m-line">We are the women who already knew.</div>
+        <div class="m-line">Who saw before the others.</div>
+        <div class="m-line">Who stopped waiting for permission.</div>
+      </div>
+      <div class="m-divider"></div>
+      <div class="m-stanza">
+        <div class="m-line">The Revolt is not a protest.</div>
+        <div class="m-line">It is not a petition.</div>
+        <div class="m-line">It is not a hashtag.</div>
+        <br>
+        <div class="m-line bold red">It is a system.</div>
+        <div class="m-line">Built for the one who is alone in a room.</div>
+        <div class="m-line">For those who cannot afford to wait.</div>
+      </div>
+      <div class="m-divider"></div>
+      <div class="m-stanza">
+        <div class="m-line bold">We do not console. We act.</div>
+        <div class="m-line bold">We do not ask for permission. We declare.</div>
+        <div class="m-line bold">We do not explain. We affirm.</div>
+      </div>
+      <div class="m-divider"></div>
+      <div class="m-stanza">
+        <div class="m-line big">No one is left out.</div>
+        <div class="m-line big red">Period.</div>
+      </div>
+      <div class="m-divider"></div>
+      <div class="m-stanza">
+        <div class="m-line" style="font-style:italic">This is the Circle.</div>
+        <div class="m-line" style="font-style:italic">This is the Signal.</div>
+        <div class="m-line red" style="font-style:italic">This is the Revolt.</div>
+      </div>
+      <div class="m-circle">○</div>
+      <div class="m-footer">Women's Revolt™ · La Rivolta delle Donne · Micronos Ltd · 2026</div>
+    </div>
+
+    <!-- ESPAÑOL -->
+    <div class="manifesto-content" id="lang-es">
+      <div class="m-title">WOMEN'S REVOLT™ — EL MANIFIESTO</div>
+      <div class="m-sub">La Revuelta de las Mujeres</div>
+      <div class="m-stanza">
+        <div class="m-line">La Revuelta no comenzó hoy.</div>
+        <div class="m-line">Comenzó hace veinte años, en silencio.</div>
+        <div class="m-line">Como todas las cosas serias.</div>
+      </div>
+      <div class="m-divider"></div>
+      <div class="m-stanza">
+        <div class="m-line bold">No pedimos.</div>
+        <div class="m-line bold">No esperamos.</div>
+        <div class="m-line bold">No explicamos.</div>
+      </div>
+      <div class="m-divider"></div>
+      <div class="m-stanza">
+        <div class="m-line">Somos las mujeres que ya lo sabían.</div>
+        <div class="m-line">Que vieron antes que los demás.</div>
+        <div class="m-line">Que dejaron de esperar permiso.</div>
+      </div>
+      <div class="m-divider"></div>
+      <div class="m-stanza">
+        <div class="m-line">La Revuelta no es una protesta.</div>
+        <div class="m-line">No es una petición.</div>
+        <div class="m-line">No es un hashtag.</div>
+        <br>
+        <div class="m-line bold red">Es un sistema.</div>
+        <div class="m-line">Construido para quien está sola en una habitación.</div>
+        <div class="m-line">Para quienes no pueden permitirse esperar.</div>
+      </div>
+      <div class="m-divider"></div>
+      <div class="m-stanza">
+        <div class="m-line bold">No consolamos. Actuamos.</div>
+        <div class="m-line bold">No pedimos permiso. Declaramos.</div>
+        <div class="m-line bold">No explicamos. Afirmamos.</div>
+      </div>
+      <div class="m-divider"></div>
+      <div class="m-stanza">
+        <div class="m-line big">Ninguna se queda fuera.</div>
+        <div class="m-line big red">Punto.</div>
+      </div>
+      <div class="m-divider"></div>
+      <div class="m-stanza">
+        <div class="m-line" style="font-style:italic">Este es el Círculo.</div>
+        <div class="m-line" style="font-style:italic">Esta es la Señal.</div>
+        <div class="m-line red" style="font-style:italic">Esta es la Revuelta.</div>
+      </div>
+      <div class="m-circle">○</div>
+      <div class="m-footer">Women's Revolt™ · La Revuelta de las Mujeres · Micronos Ltd · 2026</div>
+    </div>
+
+    <!-- FRANÇAIS -->
+    <div class="manifesto-content" id="lang-fr">
+      <div class="m-title">WOMEN'S REVOLT™ — LE MANIFESTE</div>
+      <div class="m-sub">La Révolte des Femmes</div>
+      <div class="m-stanza">
+        <div class="m-line">La Révolte n'a pas commencé aujourd'hui.</div>
+        <div class="m-line">Elle a commencé il y a vingt ans, en silence.</div>
+        <div class="m-line">Comme toutes les choses sérieuses.</div>
+      </div>
+      <div class="m-divider"></div>
+      <div class="m-stanza">
+        <div class="m-line bold">Nous ne demandons pas.</div>
+        <div class="m-line bold">Nous n'attendons pas.</div>
+        <div class="m-line bold">Nous n'expliquons pas.</div>
+      </div>
+      <div class="m-divider"></div>
+      <div class="m-stanza">
+        <div class="m-line">Nous sommes les femmes qui savaient déjà.</div>
+        <div class="m-line">Qui ont vu avant les autres.</div>
+        <div class="m-line">Qui ont cessé d'attendre la permission.</div>
+      </div>
+      <div class="m-divider"></div>
+      <div class="m-stanza">
+        <div class="m-line">La Révolte n'est pas une protestation.</div>
+        <div class="m-line">Ce n'est pas une pétition.</div>
+        <div class="m-line">Ce n'est pas un hashtag.</div>
+        <br>
+        <div class="m-line bold red">C'est un système.</div>
+        <div class="m-line">Construit pour celle qui est seule dans une pièce.</div>
+        <div class="m-line">Pour celles qui ne peuvent pas se permettre d'attendre.</div>
+      </div>
+      <div class="m-divider"></div>
+      <div class="m-stanza">
+        <div class="m-line bold">Nous ne consolons pas. Nous agissons.</div>
+        <div class="m-line bold">Nous ne demandons pas la permission. Nous déclarons.</div>
+        <div class="m-line bold">Nous n'expliquons pas. Nous affirmons.</div>
+      </div>
+      <div class="m-divider"></div>
+      <div class="m-stanza">
+        <div class="m-line big">Personne n'est laissée dehors.</div>
+        <div class="m-line big red">Point.</div>
+      </div>
+      <div class="m-divider"></div>
+      <div class="m-stanza">
+        <div class="m-line" style="font-style:italic">C'est le Cercle.</div>
+        <div class="m-line" style="font-style:italic">C'est le Signal.</div>
+        <div class="m-line red" style="font-style:italic">C'est la Révolte.</div>
+      </div>
+      <div class="m-circle">○</div>
+      <div class="m-footer">Women's Revolt™ · La Révolte des Femmes · Micronos Ltd · 2026</div>
+    </div>
+
   </div>
+</section>
+
+<!-- VOLUMES -->
+<div class="volumes">
+  <div class="vol"><div class="vol-num">I</div><div class="vol-title">Volume One</div><div class="vol-desc">The escape. Five women. One night that changes everything.</div><div class="vol-tag">Available now</div></div>
+  <div class="vol"><div class="vol-num">II</div><div class="vol-title">Volume Two</div><div class="vol-desc">One year after. Building a life on the other side of silence.</div><div class="vol-tag">In development</div></div>
+  <div class="vol"><div class="vol-num">III</div><div class="vol-title">Volume Three</div><div class="vol-desc">America, 2028. The final reckoning with the systems that built the cage.</div><div class="vol-tag">Completed</div></div>
+</div>
+
+<!-- BAND -->
+<div class="band">
+  <div class="band-title">Support the Revolt</div>
+  <div class="band-body">An independent project. No publisher. No compromise. If this story matters to you — help it reach the world.</div>
+  <div class="btns">
+    <a href="https://ko-fi.com/womensrevolt" class="btn btn-white" target="_blank">Support on Ko-fi</a>
+    <a href="mailto:info@micronos.co.uk" class="btn btn-outline">Get in Touch</a>
+  </div>
+</div>
+
+<footer class="footer-inner">
+  <div class="soc">
+    <a href="https://x.com/JamesBlackq22a" target="_blank">𝕏 Twitter</a>
+    <a href="https://instagram.com/womensrevolt" target="_blank">Instagram</a>
+    <a href="https://tiktok.com/@womensrevolt" target="_blank">TikTok</a>
+  </div>
+  <div class="foot">© 2026 Micronos Ltd · Venice, Italy · Women's Revolt™ is a trademark</div>
+</footer>
+```
+
+  </div>
+
   <script>
     setTimeout(() => document.getElementById('splash-bg').classList.add('visible'), 100);
     function enter() {
@@ -128,6 +390,13 @@
       setTimeout(() => { document.getElementById('splash').style.display = 'none'; }, 1400);
     }
     document.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') enter(); });
+    function setLang(lang) {
+      document.querySelectorAll('.manifesto-content').forEach(el => el.classList.remove('active'));
+      document.querySelectorAll('.lang-btn').forEach(el => el.classList.remove('active'));
+      document.getElementById('lang-' + lang).classList.add('active');
+      event.target.classList.add('active');
+    }
   </script>
+
 </body>
 </html>
