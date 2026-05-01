@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Women's Revolt™ — The Series</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;700&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --red: #9B0000;
+      --red-light: #C0392B;
+      --gold: #B8960C;
+      --off-white: #F5F0E8;
+      --gray: #888;
+      --dark: #0A0A0A;
+      --card-bg: #111111;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--dark);
+      color: var(--off-white);
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 300;
+      letter-spacing: 0.02em;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 24px 48px;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.95) 0%, transparent 100%);
+    }
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18px;
+      font-weight: 300;
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      color: var(--off-white);
+      text-decoration: none;
+    }
+    .nav-logo span { color: var(--red-light); }
+
+    /* ── LANG SWITCHER ── */
+    .lang-switcher {
+      display: flex;
+      gap: 6px;
+    }
+    .lang-btn {
+      background: none;
+      border: 1px solid rgba(255,255,255,0.15);
+      color: rgba(255,255,255,0.45);
+      font-family: 'Montserrat', sans-serif;
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 2px;
+      padding: 6px 10px;
+      cursor: pointer;
+      transition: all 0.3s;
+      text-transform: uppercase;
+    }
+    .lang-btn:hover { border-color: var(--red-light); color: var(--red-light); }
+    .lang-btn.active {
+      background: var(--red);
+      border-color: var(--red);
+      color: #fff;
+    }
+
+    /* ── HERO STRIP ── */
+    .hero-strip {
+      padding: 160px 48px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-strip::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(155,0,0,0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .section-label {
+      font-size: 10px;
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      color: var(--red-light);
+      margin-bottom: 24px;
+      display: block;
+    }
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(52px, 8vw, 96px);
+      font-weight: 300;
+      line-height: 0.95;
+      letter-spacing: -1px;
+      color: var(--off-white);
+      max-width: 700px;
+    }
+    .hero-title em {
+      font-style: italic;
+      color: rgba(245,240,232,0.45);
+    }
+    .hero-subtitle {
+      margin-top: 32px;
+      max-width: 480px;
+      font-size: 13px;
+      line-height: 2;
+      color: rgba(245,240,232,0.55);
+      letter-spacing: 0.05em;
+    }
+    .divider-line {
+      width: 48px;
+      height: 1px;
+      background: var(--red);
+      margin: 40px 0;
+    }
+
+    /* ── VOLUMES GRID ── */
+    .volumes {
+      padding: 40px 48px 120px;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .volume-card {
+      background: var(--card-bg);
+      padding: 60px;
+      position: relative;
+      overflow: hidden;
+      transition: background 0.5s;
+      cursor: default;
+      display: grid;
+      grid-template-columns: 80px 1fr;
+      gap: 48px;
+      align-items: start;
+    }
+    .volume-card:hover { background: #161616; }
+
+    .volume-card::after {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 2px;
+      background: var(--red);
+      transform: scaleY(0);
+      transform-origin: top;
+      transition: transform 0.6s cubic-bezier(0.77,0,0.175,1);
+    }
+    .volume-card:hover::after { transform: scaleY(1); }
+
+    /* Decorative background number */
+    .volume-card::before {
+      content: attr(data-vol);
+      position: absolute;
+      right: 48px; top: 50%;
+      transform: translateY(-50%);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 200px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.025);
+      line-height: 1;
+      pointer-events: none;
+      transition: color 0.5s;
+    }
+    .volume-card:hover::before { color: rgba(155,0,0,0.06); }
+
+    .vol-number {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 14px;
+      font-weight: 400;
+      letter-spacing: 4px;
+      color: var(--red-light);
+      text-transform: uppercase;
+      padding-top: 4px;
+      white-space: nowrap;
+    }
+
+    .vol-content {}
+
+    .vol-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(28px, 3vw, 38px);
+      font-weight: 300;
+      line-height: 1.1;
+      color: var(--off-white);
+      margin-bottom: 8px;
+    }
+    .vol-status {
+      font-size: 9px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 28px;
+      display: block;
+    }
+    .vol-synopsis {
+      font-size: 14px;
+      line-height: 1.9;
+      color: rgba(245,240,232,0.62);
+      max-width: 640px;
+    }
+    .vol-synopsis strong {
+      color: var(--off-white);
+      font-weight: 400;
+    }
+
+    .vol-meta {
+      margin-top: 32px;
+      display: flex;
+      gap: 32px;
+      flex-wrap: wrap;
+    }
+    .vol-meta-item {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .vol-meta-label {
+      font-size: 8px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.25);
+    }
+    .vol-meta-value {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 15px;
+      color: rgba(245,240,232,0.7);
+    }
+
+    /* ── BOTTOM BAR ── */
+    .bottom-bar {
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding: 48px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 24px;
+    }
+    .trademark {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 13px;
+      color: rgba(255,255,255,0.2);
+      letter-spacing: 3px;
+    }
+    .cta-link {
+      font-size: 10px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--red-light);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      padding-bottom: 2px;
+      transition: border-color 0.3s;
+    }
+    .cta-link:hover { border-color: var(--red-light); }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .hero-strip, .volume-card {
+      animation: fadeUp 0.9s ease both;
+    }
+    .volume-card:nth-child(1) { animation-delay: 0.1s; }
+    .volume-card:nth-child(2) { animation-delay: 0.25s; }
+    .volume-card:nth-child(3) { animation-delay: 0.4s; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav { padding: 20px 24px; }
+      .hero-strip { padding: 130px 24px 60px; }
+      .volumes { padding: 20px 0 80px; gap: 1px; }
+      .volume-card { padding: 40px 24px; grid-template-columns: 1fr; gap: 8px; }
+      .volume-card::before { display: none; }
+      .bottom-bar { padding: 32px 24px; }
+      .lang-btn { padding: 5px 8px; font-size: 9px; }
+    }
+
+    /* ── LANG CONTENT (hide/show) ── */
+    [data-lang] { display: none; }
+    [data-lang].active { display: block; }
+    [data-lang-inline] { display: none; }
+    [data-lang-inline].active { display: inline; }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="index.html">Women's Revolt<span>™</span></a>
+  <div class="lang-switcher">
+    <button class="lang-btn active" onclick="setLang('it')">IT</button>
+    <button class="lang-btn" onclick="setLang('en')">EN</button>
+    <button class="lang-btn" onclick="setLang('fr')">FR</button>
+    <button class="lang-btn" onclick="setLang('es')">ES</button>
+  </div>
+</nav>
+
+<!-- HERO STRIP -->
+<section class="hero-strip">
+  <span class="section-label">Women's Revolt™</span>
+
+  <h1 class="hero-title">
+    <span data-lang="it" class="active">La<br><em>Serie</em></span>
+    <span data-lang="en">The<br><em>Series</em></span>
+    <span data-lang="fr">La<br><em>Série</em></span>
+    <span data-lang="es">La<br><em>Serie</em></span>
+  </h1>
+
+  <div class="divider-line"></div>
+
+  <p class="hero-subtitle">
+    <span data-lang="it" class="active">Tre volumi. Un solo mondo che cambia per sempre. America, 2028.</span>
+    <span data-lang="en">Three volumes. One world changed forever. America, 2028.</span>
+    <span data-lang="fr">Trois volumes. Un monde transformé à jamais. Amérique, 2028.</span>
+    <span data-lang="es">Tres volúmenes. Un mundo cambiado para siempre. América, 2028.</span>
+  </p>
+</section>
+
+<!-- VOLUMES -->
+<section class="volumes">
+
+  <!-- VOL. 1 -->
+  <article class="volume-card" data-vol="I">
+    <div class="vol-number">Vol. I</div>
+    <div class="vol-content">
+
+      <h2 class="vol-title">
+        <span data-lang="it" class="active">Il Silenzio<br>Era L'Ultimo Avvertimento</span>
+        <span data-lang="en">Her Silence<br>Was The Last Warning</span>
+        <span data-lang="fr">Son Silence<br>Était Le Dernier Avertissement</span>
+        <span data-lang="es">Su Silencio<br>Era La Última Advertencia</span>
+      </h2>
+
+      <span class="vol-status">
+        <span data-lang-inline="it" class="active">Disponibile</span>
+        <span data-lang-inline="en">Available</span>
+        <span data-lang-inline="fr">Disponible</span>
+        <span data-lang-inline="es">Disponible</span>
+      </span>
+
+      <p class="vol-synopsis">
+        <span data-lang="it" class="active">
+          America, 2028. Quattro infermiere — <strong>Brenda, Jenny, Lindsay, Shane</strong> — scoprono di avere più in comune di quanto pensassero. Una rivolta silenziosa nasce nei corridoi di un ospedale di Los Angeles. Non hanno pianificato nulla. Non avevano un manifesto, né un partito, né un leader. Avevano la verità. Con il sostegno della giudice <strong>Janet Moody</strong> e dell'avvocata <strong>Betty Langston</strong>, quello che inizia come un atto di resistenza privata diventa qualcosa che nessuno, mai più, potrà fermare.
+        </span>
+        <span data-lang="en">
+          America, 2028. Four nurses — <strong>Brenda, Jenny, Lindsay, Shane</strong> — discover they have more in common than they ever imagined. A silent revolt is born in the corridors of a Los Angeles hospital. They had no plan, no manifesto, no party, no leader. They had the truth. With the support of Judge <strong>Janet Moody</strong> and attorney <strong>Betty Langston</strong>, what begins as a private act of resistance becomes something no one will ever be able to stop.
+        </span>
+        <span data-lang="fr">
+          Amérique, 2028. Quatre infirmières — <strong>Brenda, Jenny, Lindsay, Shane</strong> — découvrent qu'elles ont plus en commun qu'elles ne l'avaient jamais imaginé. Une révolte silencieuse naît dans les couloirs d'un hôpital de Los Angeles. Elles n'avaient ni plan, ni manifeste, ni parti, ni chef. Elles avaient la vérité. Avec le soutien de la juge <strong>Janet Moody</strong> et de l'avocate <strong>Betty Langston</strong>, ce qui commence comme un acte de résistance privée devient quelque chose que personne ne pourra jamais arrêter.
+        </span>
+        <span data-lang="es">
+          América, 2028. Cuatro enfermeras — <strong>Brenda, Jenny, Lindsay, Shane</strong> — descubren que tienen más en común de lo que jamás imaginaron. Una revuelta silenciosa nace en los pasillos de un hospital de Los Ángeles. No tenían plan, ni manifiesto, ni partido, ni líder. Tenían la verdad. Con el apoyo de la jueza <strong>Janet Moody</strong> y la abogada <strong>Betty Langston</strong>, lo que empieza como un acto de resistencia privada se convierte en algo que nadie podrá detener jamás.
+        </span>
+      </p>
+
+      <div class="vol-meta">
+        <div class="vol-meta-item">
+          <span class="vol-meta-label">
+            <span data-lang-inline="it" class="active">Pagine</span>
+            <span data-lang-inline="en">Pages</span>
+            <span data-lang-inline="fr">Pages</span>
+            <span data-lang-inline="es">Páginas</span>
+          </span>
+          <span class="vol-meta-value">41 cap.</span>
+        </div>
+        <div class="vol-meta-item">
+          <span class="vol-meta-label">
+            <span data-lang-inline="it" class="active">Formato</span>
+            <span data-lang-inline="en">Format</span>
+            <span data-lang-inline="fr">Format</span>
+            <span data-lang-inline="es">Formato</span>
+          </span>
+          <span class="vol-meta-value">6 × 9 in</span>
+        </div>
+        <div class="vol-meta-item">
+          <span class="vol-meta-label">
+            <span data-lang-inline="it" class="active">Lingue</span>
+            <span data-lang-inline="en">Languages</span>
+            <span data-lang-inline="fr">Langues</span>
+            <span data-lang-inline="es">Idiomas</span>
+          </span>
+          <span class="vol-meta-value">IT · EN</span>
+        </div>
+      </div>
+
+    </div>
+  </article>
+
+  <!-- VOL. 2 -->
+  <article class="volume-card" data-vol="II">
+    <div class="vol-number">Vol. II</div>
+    <div class="vol-content">
+
+      <h2 class="vol-title">
+        <span data-lang="it" class="active">Il Potere<br>Non Dorme Mai</span>
+        <span data-lang="en">Power<br>Never Sleeps</span>
+        <span data-lang="fr">Le Pouvoir<br>Ne Dort Jamais</span>
+        <span data-lang="es">El Poder<br>Nunca Duerme</span>
+      </h2>
+
+      <span class="vol-status" style="color: rgba(184,150,12,0.7);">
+        <span data-lang-inline="it" class="active">In preparazione</span>
+        <span data-lang-inline="en">In preparation</span>
+        <span data-lang-inline="fr">En préparation</span>
+        <span data-lang-inline="es">En preparación</span>
+      </span>
+
+      <p class="vol-synopsis">
+        <span data-lang="it" class="active">
+          La rivolta ha un nome. Ora deve avere un futuro. Mentre i loro uomini scontano le pene, <strong>Brenda, Jenny, Lindsay e Shane</strong> costruiscono qualcosa che nessun tribunale ha mai visto prima. Ma il potere attira nemici — e non tutti vengono dall'esterno. Le alleanze si spezzano. Le certezze vacillano. E le domande più pericolose non riguardano il sistema: riguardano chi sei disposta a diventare.
+        </span>
+        <span data-lang="en">
+          The revolt has a name. Now it needs a future. As their men serve their sentences, <strong>Brenda, Jenny, Lindsay and Shane</strong> are building something no courtroom has ever seen before. But power attracts enemies — and not all of them come from the outside. Alliances fracture. Certainties waver. And the most dangerous questions aren't about the system — they're about who you're willing to become.
+        </span>
+        <span data-lang="fr">
+          La révolte a un nom. Maintenant, il lui faut un avenir. Pendant que leurs hommes purgent leurs peines, <strong>Brenda, Jenny, Lindsay et Shane</strong> construisent quelque chose qu'aucun tribunal n'a jamais vu. Mais le pouvoir attire les ennemis — et ils ne viennent pas tous de l'extérieur. Les alliances se fracturent. Les certitudes vacillent. Et les questions les plus dangereuses ne concernent pas le système — elles concernent qui vous êtes prête à devenir.
+        </span>
+        <span data-lang="es">
+          La revuelta tiene un nombre. Ahora necesita un futuro. Mientras sus hombres cumplen sus condenas, <strong>Brenda, Jenny, Lindsay y Shane</strong> construyen algo que ningún tribunal ha visto antes. Pero el poder atrae enemigos — y no todos vienen de fuera. Las alianzas se rompen. Las certezas vacilan. Y las preguntas más peligrosas no son sobre el sistema — son sobre quién estás dispuesta a convertirte.
+        </span>
+      </p>
+
+      <div class="vol-meta">
+        <div class="vol-meta-item">
+          <span class="vol-meta-label">
+            <span data-lang-inline="it" class="active">Editor</span>
+            <span data-lang-inline="en">Editor</span>
+            <span data-lang-inline="fr">Éditeur</span>
+            <span data-lang-inline="es">Editora</span>
+          </span>
+          <span class="vol-meta-value">Fran Lebowitz</span>
+        </div>
+        <div class="vol-meta-item">
+          <span class="vol-meta-label">
+            <span data-lang-inline="it" class="active">Lingue</span>
+            <span data-lang-inline="en">Languages</span>
+            <span data-lang-inline="fr">Langues</span>
+            <span data-lang-inline="es">Idiomas</span>
+          </span>
+          <span class="vol-meta-value">IT · EN</span>
+        </div>
+      </div>
+
+    </div>
+  </article>
+
+  <!-- VOL. 3 -->
+  <article class="volume-card" data-vol="III">
+    <div class="vol-number">Vol. III</div>
+    <div class="vol-content">
+
+      <h2 class="vol-title">
+        <span data-lang="it" class="active">La Fine<br>Di Ogni Sistema</span>
+        <span data-lang="en">The End<br>Of Every System</span>
+        <span data-lang="fr">La Fin<br>De Tout Système</span>
+        <span data-lang="es">El Fin<br>De Todo Sistema</span>
+      </h2>
+
+      <span class="vol-status" style="color: rgba(184,150,12,0.7);">
+        <span data-lang-inline="it" class="active">In preparazione</span>
+        <span data-lang-inline="en">In preparation</span>
+        <span data-lang-inline="fr">En préparation</span>
+        <span data-lang-inline="es">En preparación</span>
+      </span>
+
+      <p class="vol-synopsis">
+        <span data-lang="it" class="active">
+          Il sistema non si arrende mai. <strong>Bernie Thompson</strong> fugge. <strong>Destiny Crawford</strong> tradisce. Gli uomini scappano — Miami, l'ombra, il silenzio. Ma il movimento è già ovunque, in ogni paese, in ogni lingua, in ogni donna che ha deciso di non aspettare più. Il confronto finale non avviene in un'aula di tribunale. Avviene dentro ogni scelta che nessuno ti può più sottrarre.
+        </span>
+        <span data-lang="en">
+          The system never surrenders. <strong>Bernie Thompson</strong> escapes. <strong>Destiny Crawford</strong> betrays. Men flee — Miami, the shadows, the silence. But the movement is already everywhere: in every country, every language, every woman who decided she was done waiting. The final confrontation doesn't happen in a courtroom. It happens inside every choice no one can take from you anymore.
+        </span>
+        <span data-lang="fr">
+          Le système ne capitule jamais. <strong>Bernie Thompson</strong> s'enfuit. <strong>Destiny Crawford</strong> trahit. Les hommes fuient — Miami, l'ombre, le silence. Mais le mouvement est déjà partout : dans chaque pays, chaque langue, chaque femme qui a décidé d'en avoir fini d'attendre. La confrontation finale ne se passe pas dans une salle d'audience. Elle se passe dans chaque choix que personne ne peut plus vous prendre.
+        </span>
+        <span data-lang="es">
+          El sistema nunca se rinde. <strong>Bernie Thompson</strong> huye. <strong>Destiny Crawford</strong> traiciona. Los hombres escapan — Miami, las sombras, el silencio. Pero el movimiento ya está en todas partes: en cada país, cada idioma, cada mujer que decidió que ya no iba a esperar más. El enfrentamiento final no ocurre en una sala del tribunal. Ocurre dentro de cada decisión que nadie puede quitarte ya.
+        </span>
+      </p>
+
+      <div class="vol-meta">
+        <div class="vol-meta-item">
+          <span class="vol-meta-label">
+            <span data-lang-inline="it" class="active">Editor</span>
+            <span data-lang-inline="en">Editor</span>
+            <span data-lang-inline="fr">Éditeur</span>
+            <span data-lang-inline="es">Editora</span>
+          </span>
+          <span class="vol-meta-value">Fran Lebowitz</span>
+        </div>
+        <div class="vol-meta-item">
+          <span class="vol-meta-label">
+            <span data-lang-inline="it" class="active">Antagonista</span>
+            <span data-lang-inline="en">Antagonist</span>
+            <span data-lang-inline="fr">Antagoniste</span>
+            <span data-lang-inline="es">Antagonista</span>
+          </span>
+          <span class="vol-meta-value">Bernie Thompson</span>
+        </div>
+        <div class="vol-meta-item">
+          <span class="vol-meta-label">
+            <span data-lang-inline="it" class="active">Lingue</span>
+            <span data-lang-inline="en">Languages</span>
+            <span data-lang-inline="fr">Langues</span>
+            <span data-lang-inline="es">Idiomas</span>
+          </span>
+          <span class="vol-meta-value">IT · EN</span>
+        </div>
+      </div>
+
+    </div>
+  </article>
+
+</section>
+
+<!-- BOTTOM BAR -->
+<footer class="bottom-bar">
+  <span class="trademark">Women's Revolt™ · © J. Blackwood · Micronos Ltd</span>
+  <a class="cta-link" href="main.html">
+    <span data-lang-inline="it" class="active">← Torna al Manifesto</span>
+    <span data-lang-inline="en">← Back to Manifesto</span>
+    <span data-lang-inline="fr">← Retour au Manifeste</span>
+    <span data-lang-inline="es">← Volver al Manifiesto</span>
+  </a>
+</footer>
+
+<script>
+  function setLang(lang) {
+    // Toggle buttons
+    document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+    document.querySelector(`.lang-btn[onclick="setLang('${lang}')"]`).classList.add('active');
+
+    // Toggle block elements
+    document.querySelectorAll('[data-lang]').forEach(el => {
+      el.classList.toggle('active', el.getAttribute('data-lang') === lang);
+    });
+
+    // Toggle inline elements
+    document.querySelectorAll('[data-lang-inline]').forEach(el => {
+      el.classList.toggle('active', el.getAttribute('data-lang-inline') === lang);
+    });
+
+    document.documentElement.lang = lang;
+  }
+</script>
+</body>
+</html>
+ 
