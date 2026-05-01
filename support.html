@@ -1,1 +1,775 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Women's Revolt™ — Sostieni il Progetto</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --red: #9B0000;
+      --red-light: #C0392B;
+      --gold: #B8960C;
+      --gold-light: rgba(184,150,12,0.85);
+      --off-white: #F5F0E8;
+      --dark: #080808;
+      --panel: #0D0D0D;
+      --panel2: #111111;
+      --active: rgba(155,0,0,0.08);
+    }
 
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--dark);
+      color: var(--off-white);
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 300;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 24px 48px;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.97) 0%, transparent 100%);
+    }
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18px;
+      font-weight: 300;
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      color: var(--off-white);
+      text-decoration: none;
+    }
+    .nav-logo span { color: var(--red-light); }
+    .lang-switcher { display: flex; gap: 6px; }
+    .lang-btn {
+      background: none;
+      border: 1px solid rgba(255,255,255,0.15);
+      color: rgba(255,255,255,0.4);
+      font-family: 'Montserrat', sans-serif;
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 2px;
+      padding: 6px 10px;
+      cursor: pointer;
+      transition: all 0.3s;
+      text-transform: uppercase;
+    }
+    .lang-btn:hover { border-color: var(--red-light); color: var(--red-light); }
+    .lang-btn.active { background: var(--red); border-color: var(--red); color: #fff; }
+
+    /* ── HERO ── */
+    .hero {
+      padding: 160px 48px 90px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 50% at 80% 50%, rgba(155,0,0,0.09) 0%, transparent 65%),
+        radial-gradient(ellipse 40% 60% at 10% 80%, rgba(155,0,0,0.06) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .hero-inner { position: relative; z-index: 1; max-width: 800px; }
+    .section-label {
+      font-size: 10px;
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      color: var(--red-light);
+      margin-bottom: 28px;
+      display: block;
+    }
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(50px, 8vw, 100px);
+      font-weight: 300;
+      line-height: 0.92;
+      letter-spacing: -2px;
+    }
+    .hero-title em { font-style: italic; color: rgba(245,240,232,0.35); }
+    .divider-line { width: 48px; height: 1px; background: var(--red); margin: 40px 0; }
+    .hero-desc {
+      font-size: 14px;
+      line-height: 2;
+      color: rgba(245,240,232,0.55);
+      max-width: 560px;
+    }
+    .hero-desc strong { color: var(--off-white); font-weight: 400; }
+
+    /* ── INTRO BAND ── */
+    .intro-band {
+      background: var(--panel2);
+      border-top: 1px solid rgba(255,255,255,0.05);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      padding: 44px 48px;
+      display: flex;
+      align-items: center;
+      gap: 48px;
+      flex-wrap: wrap;
+    }
+    .intro-band-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(16px, 2vw, 20px);
+      font-style: italic;
+      line-height: 1.7;
+      color: rgba(245,240,232,0.65);
+      flex: 1;
+      min-width: 260px;
+    }
+    .intro-band-note {
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.2);
+      max-width: 220px;
+      line-height: 1.8;
+    }
+
+    /* ── PLATFORMS GRID ── */
+    .platforms {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+      margin-top: 2px;
+    }
+
+    .platform-card {
+      background: var(--panel);
+      padding: 60px 52px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      transition: background 0.4s;
+    }
+    .platform-card:hover { background: #131313; }
+
+    /* Colored top border per platform */
+    .platform-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--card-color, var(--red));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.5s cubic-bezier(0.77,0,0.175,1);
+    }
+    .platform-card:hover::before { transform: scaleX(1); }
+
+    /* Active badge */
+    .badge-active {
+      position: absolute;
+      top: 28px; right: 28px;
+      font-size: 8px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #fff;
+      background: var(--red);
+      padding: 5px 12px;
+    }
+    .badge-soon {
+      position: absolute;
+      top: 28px; right: 28px;
+      font-size: 8px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      border: 1px solid rgba(255,255,255,0.1);
+      padding: 5px 12px;
+    }
+
+    .platform-icon {
+      font-size: 36px;
+      margin-bottom: 28px;
+      display: block;
+    }
+    .platform-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 38px;
+      font-weight: 300;
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .platform-role {
+      font-size: 9px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--gold-light);
+      margin-bottom: 28px;
+    }
+    .platform-desc {
+      font-size: 13px;
+      line-height: 1.95;
+      color: rgba(245,240,232,0.55);
+      flex: 1;
+    }
+    .platform-desc strong { color: var(--off-white); font-weight: 400; }
+
+    .platform-what {
+      margin-top: 28px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(255,255,255,0.07);
+    }
+    .platform-what-label {
+      font-size: 8px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.25);
+      margin-bottom: 12px;
+      display: block;
+    }
+    .platform-what ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .platform-what ul li {
+      font-size: 12px;
+      color: rgba(245,240,232,0.5);
+      padding-left: 16px;
+      position: relative;
+    }
+    .platform-what ul li::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: var(--red-light);
+    }
+
+    .platform-cta {
+      display: inline-block;
+      margin-top: 32px;
+      padding: 14px 32px;
+      font-size: 9px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      text-decoration: none;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 500;
+      transition: all 0.3s;
+      align-self: flex-start;
+    }
+    .cta-primary {
+      background: var(--red);
+      color: #fff;
+      border: 1px solid var(--red);
+    }
+    .cta-primary:hover { background: var(--red-light); border-color: var(--red-light); }
+    .cta-disabled {
+      background: transparent;
+      color: rgba(255,255,255,0.25);
+      border: 1px solid rgba(255,255,255,0.1);
+      cursor: default;
+      pointer-events: none;
+    }
+
+    /* ── HOW IT WORKS ── */
+    .how {
+      background: var(--panel2);
+      padding: 72px 48px;
+      margin-top: 2px;
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 80px;
+      align-items: start;
+    }
+    .how-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(32px, 3.5vw, 46px);
+      font-weight: 300;
+      line-height: 1.1;
+      position: sticky;
+      top: 100px;
+    }
+    .how-title em { font-style: italic; color: rgba(245,240,232,0.35); }
+    .how-steps { display: flex; flex-direction: column; gap: 40px; }
+    .how-step { display: flex; gap: 28px; align-items: flex-start; }
+    .step-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 48px;
+      font-weight: 300;
+      color: rgba(155,0,0,0.3);
+      line-height: 1;
+      flex-shrink: 0;
+      width: 48px;
+    }
+    .step-content {}
+    .step-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-weight: 400;
+      margin-bottom: 10px;
+    }
+    .step-text {
+      font-size: 13px;
+      line-height: 1.9;
+      color: rgba(245,240,232,0.52);
+    }
+
+    /* ── FOOTER ── */
+    .bottom-bar {
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding: 48px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 24px;
+      margin-top: 2px;
+    }
+    .trademark { font-family: 'Cormorant Garamond', serif; font-size: 13px; color: rgba(255,255,255,0.2); letter-spacing: 3px; }
+    .nav-links { display: flex; gap: 32px; flex-wrap: wrap; }
+    .nav-link {
+      font-size: 10px; letter-spacing: 4px; text-transform: uppercase;
+      color: rgba(255,255,255,0.3); text-decoration: none; transition: color 0.3s;
+    }
+    .nav-link:hover { color: var(--red-light); }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .platform-card { animation: fadeUp 0.8s ease both; }
+    .platform-card:nth-child(1) { animation-delay: 0.05s; }
+    .platform-card:nth-child(2) { animation-delay: 0.15s; }
+    .platform-card:nth-child(3) { animation-delay: 0.25s; }
+    .platform-card:nth-child(4) { animation-delay: 0.35s; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav { padding: 20px 24px; }
+      .hero { padding: 130px 24px 64px; }
+      .intro-band { padding: 36px 24px; }
+      .platforms { grid-template-columns: 1fr; }
+      .platform-card { padding: 48px 24px; }
+      .how { grid-template-columns: 1fr; padding: 56px 24px; gap: 48px; }
+      .how-title { position: static; }
+      .bottom-bar { padding: 32px 24px; flex-direction: column; align-items: flex-start; }
+    }
+
+    /* ── LANG ── */
+    [data-lang] { display: none; }
+    [data-lang].active { display: block; }
+    [data-lang-inline] { display: none; }
+    [data-lang-inline].active { display: inline; }
+    [data-lang-list] { display: none; }
+    [data-lang-list].active { display: flex; }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="index.html">Women's Revolt<span>™</span></a>
+  <div class="lang-switcher">
+    <button class="lang-btn active" onclick="setLang('it')">IT</button>
+    <button class="lang-btn" onclick="setLang('en')">EN</button>
+    <button class="lang-btn" onclick="setLang('fr')">FR</button>
+    <button class="lang-btn" onclick="setLang('es')">ES</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <span class="section-label">Women's Revolt™</span>
+    <h1 class="hero-title">
+      <span data-lang="it" class="active">Sostieni<br><em>il Progetto</em></span>
+      <span data-lang="en">Support<br><em>the Project</em></span>
+      <span data-lang="fr">Soutenir<br><em>le Projet</em></span>
+      <span data-lang="es">Apoya<br><em>el Proyecto</em></span>
+    </h1>
+    <div class="divider-line"></div>
+    <p class="hero-desc">
+      <span data-lang="it" class="active">
+        Women's Revolt™ è un progetto indipendente. Nessuna casa editrice multinazionale. Nessun grande studio. <strong>Solo una visione, vent'anni di lavoro, e le persone che scelgono di crederci.</strong> Ogni contributo — piccolo o grande — va direttamente alla creazione, alla pubblicazione e alla Fondazione.
+      </span>
+      <span data-lang="en">
+        Women's Revolt™ is an independent project. No multinational publisher. No major studio. <strong>Just a vision, twenty years of work, and the people who choose to believe in it.</strong> Every contribution — small or large — goes directly to creation, publication, and the Foundation.
+      </span>
+      <span data-lang="fr">
+        Women's Revolt™ est un projet indépendant. Pas de grand éditeur multinational. Pas de studio majeur. <strong>Juste une vision, vingt ans de travail, et les personnes qui choisissent d'y croire.</strong> Chaque contribution — petite ou grande — va directement à la création, à la publication et à la Fondation.
+      </span>
+      <span data-lang="es">
+        Women's Revolt™ es un proyecto independiente. Sin gran editorial multinacional. Sin gran estudio. <strong>Solo una visión, veinte años de trabajo, y las personas que eligen creer en él.</strong> Cada contribución — pequeña o grande — va directamente a la creación, la publicación y la Fundación.
+      </span>
+    </p>
+  </div>
+</section>
+
+<!-- INTRO BAND -->
+<div class="intro-band">
+  <p class="intro-band-text">
+    <span data-lang="it" class="active">"Non vi chiediamo di finanziare un sogno. Vi chiediamo di partecipare a qualcosa che sta già accadendo."</span>
+    <span data-lang="en">"We are not asking you to fund a dream. We are asking you to be part of something already happening."</span>
+    <span data-lang="fr">"Nous ne vous demandons pas de financer un rêve. Nous vous invitons à faire partie de quelque chose qui se passe déjà."</span>
+    <span data-lang="es">"No les pedimos que financien un sueño. Les pedimos que formen parte de algo que ya está ocurriendo."</span>
+  </p>
+  <p class="intro-band-note">
+    <span data-lang="it" class="active">Il 10% di ogni ricavo è destinato alla Women's Revolt Foundation per il sostegno alle donne in stato di bisogno.</span>
+    <span data-lang="en">10% of every revenue goes to the Women's Revolt Foundation to support women in need.</span>
+    <span data-lang="fr">10% de chaque revenu est destiné à la Women's Revolt Foundation pour soutenir les femmes dans le besoin.</span>
+    <span data-lang="es">El 10% de cada ingreso va a la Women's Revolt Foundation para apoyar a mujeres en situación de necesidad.</span>
+  </p>
+</div>
+
+<!-- PLATFORMS -->
+<div class="platforms">
+
+  <!-- KO-FI -->
+  <div class="platform-card" style="--card-color: #FF5E5B;">
+    <span class="badge-active">
+      <span data-lang-inline="it" class="active">Attivo</span>
+      <span data-lang-inline="en">Active</span>
+      <span data-lang-inline="fr">Actif</span>
+      <span data-lang-inline="es">Activo</span>
+    </span>
+    <span class="platform-icon">☕</span>
+    <h2 class="platform-name">Ko-fi</h2>
+    <div class="platform-role">
+      <span data-lang-inline="it" class="active">Donazione libera · Già attivo</span>
+      <span data-lang-inline="en">Free donation · Already active</span>
+      <span data-lang-inline="fr">Don libre · Déjà actif</span>
+      <span data-lang-inline="es">Donación libre · Ya activo</span>
+    </div>
+    <p class="platform-desc">
+      <span data-lang="it" class="active">La forma di sostegno più semplice e diretta. Nessun abbonamento, nessun impegno. <strong>Contribuisci quanto vuoi, quando vuoi.</strong> Zero commissioni di piattaforma — ogni euro arriva direttamente al progetto.</span>
+      <span data-lang="en">The simplest and most direct form of support. No subscription, no commitment. <strong>Contribute as much as you want, when you want.</strong> Zero platform fees — every euro goes directly to the project.</span>
+      <span data-lang="fr">La forme de soutien la plus simple et la plus directe. Pas d'abonnement, pas d'engagement. <strong>Contribuez autant que vous voulez, quand vous voulez.</strong> Zéro frais de plateforme — chaque euro va directement au projet.</span>
+      <span data-lang="es">La forma de apoyo más sencilla y directa. Sin suscripción, sin compromiso. <strong>Contribuye lo que quieras, cuando quieras.</strong> Sin comisiones de plataforma — cada euro va directamente al proyecto.</span>
+    </p>
+    <div class="platform-what">
+      <span class="platform-what-label">
+        <span data-lang-inline="it" class="active">Con il tuo contributo</span>
+        <span data-lang-inline="en">With your contribution</span>
+        <span data-lang-inline="fr">Avec votre contribution</span>
+        <span data-lang-inline="es">Con tu contribución</span>
+      </span>
+      <ul data-lang-list="it" class="active">
+        <li>Produzione editoriale di Vol. 1 e 2</li>
+        <li>Traduzione e distribuzione internazionale</li>
+        <li>Supporto alla Women's Revolt Foundation</li>
+      </ul>
+      <ul data-lang-list="en">
+        <li>Editorial production of Vol. 1 and 2</li>
+        <li>Translation and international distribution</li>
+        <li>Support for the Women's Revolt Foundation</li>
+      </ul>
+      <ul data-lang-list="fr">
+        <li>Production éditoriale des Vol. 1 et 2</li>
+        <li>Traduction et distribution internationale</li>
+        <li>Soutien à la Women's Revolt Foundation</li>
+      </ul>
+      <ul data-lang-list="es">
+        <li>Producción editorial de Vol. 1 y 2</li>
+        <li>Traducción y distribución internacional</li>
+        <li>Apoyo a la Women's Revolt Foundation</li>
+      </ul>
+    </div>
+    <a class="platform-cta cta-primary" href="https://ko-fi.com/jamesblackwood36439" target="_blank">
+      <span data-lang-inline="it" class="active">Vai a Ko-fi →</span>
+      <span data-lang-inline="en">Go to Ko-fi →</span>
+      <span data-lang-inline="fr">Aller sur Ko-fi →</span>
+      <span data-lang-inline="es">Ir a Ko-fi →</span>
+    </a>
+  </div>
+
+  <!-- PATREON -->
+  <div class="platform-card" style="--card-color: #FF424D;">
+    <span class="badge-soon">
+      <span data-lang-inline="it" class="active">In arrivo</span>
+      <span data-lang-inline="en">Coming soon</span>
+      <span data-lang-inline="fr">Bientôt</span>
+      <span data-lang-inline="es">Próximamente</span>
+    </span>
+    <span class="platform-icon">🎭</span>
+    <h2 class="platform-name">Patreon</h2>
+    <div class="platform-role">
+      <span data-lang-inline="it" class="active">Comunità · Abbonamento mensile</span>
+      <span data-lang-inline="en">Community · Monthly membership</span>
+      <span data-lang-inline="fr">Communauté · Abonnement mensuel</span>
+      <span data-lang-inline="es">Comunidad · Suscripción mensual</span>
+    </div>
+    <p class="platform-desc">
+      <span data-lang="it" class="active">Per chi vuole essere parte della storia mentre si scrive. Patreon permette di costruire una <strong>comunità fedele attorno alla serie</strong> — con accesso anticipato ai capitoli, contenuti esclusivi, aggiornamenti dal dietro le quinte e un rapporto diretto con l'autore.</span>
+      <span data-lang="en">For those who want to be part of the story as it is written. Patreon allows building a <strong>loyal community around the series</strong> — with early access to chapters, exclusive content, behind-the-scenes updates and direct contact with the author.</span>
+      <span data-lang="fr">Pour ceux qui veulent faire partie de l'histoire pendant qu'elle s'écrit. Patreon permet de construire une <strong>communauté fidèle autour de la série</strong> — avec accès anticipé aux chapitres, contenus exclusifs, coulisses et contact direct avec l'auteur.</span>
+      <span data-lang="es">Para quienes quieren ser parte de la historia mientras se escribe. Patreon permite construir una <strong>comunidad fiel en torno a la serie</strong> — con acceso anticipado a los capítulos, contenido exclusivo, actualizaciones del proceso y contacto directo con el autor.</span>
+    </p>
+    <div class="platform-what">
+      <span class="platform-what-label">
+        <span data-lang-inline="it" class="active">I Patron riceveranno</span>
+        <span data-lang-inline="en">Patrons will receive</span>
+        <span data-lang-inline="fr">Les Patrons recevront</span>
+        <span data-lang-inline="es">Los Patrons recibirán</span>
+      </span>
+      <ul data-lang-list="it" class="active">
+        <li>Capitoli in anteprima assoluta</li>
+        <li>Note dell'autore e riflessioni creative</li>
+        <li>Aggiornamenti esclusivi sul progetto TV</li>
+      </ul>
+      <ul data-lang-list="en">
+        <li>Chapters in absolute preview</li>
+        <li>Author's notes and creative reflections</li>
+        <li>Exclusive updates on the TV project</li>
+      </ul>
+      <ul data-lang-list="fr">
+        <li>Chapitres en avant-première absolue</li>
+        <li>Notes de l'auteur et réflexions créatives</li>
+        <li>Mises à jour exclusives sur le projet TV</li>
+      </ul>
+      <ul data-lang-list="es">
+        <li>Capítulos en primicia absoluta</li>
+        <li>Notas del autor y reflexiones creativas</li>
+        <li>Actualizaciones exclusivas del proyecto TV</li>
+      </ul>
+    </div>
+    <a class="platform-cta cta-disabled" href="#">
+      <span data-lang-inline="it" class="active">Disponibile presto</span>
+      <span data-lang-inline="en">Available soon</span>
+      <span data-lang-inline="fr">Disponible bientôt</span>
+      <span data-lang-inline="es">Disponible pronto</span>
+    </a>
+  </div>
+
+  <!-- KICKSTARTER -->
+  <div class="platform-card" style="--card-color: #05CE78;">
+    <span class="badge-soon">
+      <span data-lang-inline="it" class="active">In pianificazione</span>
+      <span data-lang-inline="en">In planning</span>
+      <span data-lang-inline="fr">En planification</span>
+      <span data-lang-inline="es">En planificación</span>
+    </span>
+    <span class="platform-icon">🚀</span>
+    <h2 class="platform-name">Kickstarter</h2>
+    <div class="platform-role">
+      <span data-lang-inline="it" class="active">Campagna · Obiettivo specifico</span>
+      <span data-lang-inline="en">Campaign · Specific goal</span>
+      <span data-lang-inline="fr">Campagne · Objectif spécifique</span>
+      <span data-lang-inline="es">Campaña · Objetivo específico</span>
+    </div>
+    <p class="platform-desc">
+      <span data-lang="it" class="active">Kickstarter sarà la piattaforma per le campagne a obiettivo: la <strong>stampa ufficiale di Vol. 1</strong>, il finanziamento del pilota televisivo, edizioni speciali. Il modello "tutto o niente" crea urgenza e visibilità globale — e trasforma ogni sostenitore in parte della storia.</span>
+      <span data-lang="en">Kickstarter will be the platform for goal-based campaigns: the <strong>official print of Vol. 1</strong>, TV pilot financing, special editions. The "all or nothing" model creates urgency and global visibility — and turns every supporter into part of the story.</span>
+      <span data-lang="fr">Kickstarter sera la plateforme pour les campagnes à objectif : l'<strong>impression officielle du Vol. 1</strong>, le financement du pilote TV, les éditions spéciales. Le modèle "tout ou rien" crée de l'urgence et une visibilité mondiale — et transforme chaque soutien en partie de l'histoire.</span>
+      <span data-lang="es">Kickstarter será la plataforma para las campañas con objetivo: la <strong>impresión oficial del Vol. 1</strong>, la financiación del piloto de TV, ediciones especiales. El modelo "todo o nada" crea urgencia y visibilidad global — y convierte a cada colaborador en parte de la historia.</span>
+    </p>
+    <div class="platform-what">
+      <span class="platform-what-label">
+        <span data-lang-inline="it" class="active">Prime campagne previste</span>
+        <span data-lang-inline="en">First planned campaigns</span>
+        <span data-lang-inline="fr">Premières campagnes prévues</span>
+        <span data-lang-inline="es">Primeras campañas previstas</span>
+      </span>
+      <ul data-lang-list="it" class="active">
+        <li>Stampa e distribuzione Vol. 1 (IT + EN)</li>
+        <li>Produzione pilota TV Women's Revolt</li>
+        <li>Edizione limitata firmata dall'autore</li>
+      </ul>
+      <ul data-lang-list="en">
+        <li>Print and distribution Vol. 1 (IT + EN)</li>
+        <li>Women's Revolt TV pilot production</li>
+        <li>Limited edition signed by the author</li>
+      </ul>
+      <ul data-lang-list="fr">
+        <li>Impression et distribution Vol. 1 (IT + EN)</li>
+        <li>Production du pilote TV Women's Revolt</li>
+        <li>Édition limitée signée par l'auteur</li>
+      </ul>
+      <ul data-lang-list="es">
+        <li>Impresión y distribución Vol. 1 (IT + EN)</li>
+        <li>Producción del piloto TV Women's Revolt</li>
+        <li>Edición limitada firmada por el autor</li>
+      </ul>
+    </div>
+    <a class="platform-cta cta-disabled" href="#">
+      <span data-lang-inline="it" class="active">Campagna in preparazione</span>
+      <span data-lang-inline="en">Campaign in preparation</span>
+      <span data-lang-inline="fr">Campagne en préparation</span>
+      <span data-lang-inline="es">Campaña en preparación</span>
+    </a>
+  </div>
+
+  <!-- GOFUNDME -->
+  <div class="platform-card" style="--card-color: #02A95C;">
+    <span class="badge-soon">
+      <span data-lang-inline="it" class="active">In pianificazione</span>
+      <span data-lang-inline="en">In planning</span>
+      <span data-lang-inline="fr">En planification</span>
+      <span data-lang-inline="es">En planificación</span>
+    </span>
+    <span class="platform-icon">🤝</span>
+    <h2 class="platform-name">GoFundMe</h2>
+    <div class="platform-role">
+      <span data-lang-inline="it" class="active">Fondazione · Raccolta fondi</span>
+      <span data-lang-inline="en">Foundation · Fundraising</span>
+      <span data-lang-inline="fr">Fondation · Collecte de fonds</span>
+      <span data-lang-inline="es">Fundación · Recaudación de fondos</span>
+    </div>
+    <p class="platform-desc">
+      <span data-lang="it" class="active">GoFundMe sarà dedicato esclusivamente alla <strong>Women's Revolt Foundation</strong>. Nessuna commissione di piattaforma — ogni donazione arriva direttamente alle donne che ne hanno bisogno. Una raccolta fondi aperta, trasparente, con aggiornamenti regolari su come vengono utilizzati i fondi.</span>
+      <span data-lang="en">GoFundMe will be dedicated exclusively to the <strong>Women's Revolt Foundation</strong>. No platform fees — every donation goes directly to the women who need it. An open, transparent fundraiser with regular updates on how funds are used.</span>
+      <span data-lang="fr">GoFundMe sera dédié exclusivement à la <strong>Women's Revolt Foundation</strong>. Pas de frais de plateforme — chaque don va directement aux femmes qui en ont besoin. Une collecte ouverte et transparente avec des mises à jour régulières sur l'utilisation des fonds.</span>
+      <span data-lang="es">GoFundMe estará dedicado exclusivamente a la <strong>Women's Revolt Foundation</strong>. Sin comisiones de plataforma — cada donación va directamente a las mujeres que lo necesitan. Una recaudación abierta y transparente con actualizaciones regulares sobre el uso de los fondos.</span>
+    </p>
+    <div class="platform-what">
+      <span class="platform-what-label">
+        <span data-lang-inline="it" class="active">I fondi andranno a</span>
+        <span data-lang-inline="en">Funds will go to</span>
+        <span data-lang-inline="fr">Les fonds iront à</span>
+        <span data-lang-inline="es">Los fondos irán a</span>
+      </span>
+      <ul data-lang-list="it" class="active">
+        <li>Vittime di violenza domestica</li>
+        <li>Supporto legale e psicologico</li>
+        <li>Programmi di reinserimento e autonomia</li>
+      </ul>
+      <ul data-lang-list="en">
+        <li>Victims of domestic violence</li>
+        <li>Legal and psychological support</li>
+        <li>Reintegration and autonomy programs</li>
+      </ul>
+      <ul data-lang-list="fr">
+        <li>Victimes de violence domestique</li>
+        <li>Soutien juridique et psychologique</li>
+        <li>Programmes de réinsertion et d'autonomie</li>
+      </ul>
+      <ul data-lang-list="es">
+        <li>Víctimas de violencia doméstica</li>
+        <li>Apoyo legal y psicológico</li>
+        <li>Programas de reinserción y autonomía</li>
+      </ul>
+    </div>
+    <a class="platform-cta cta-disabled" href="#">
+      <span data-lang-inline="it" class="active">Disponibile presto</span>
+      <span data-lang-inline="en">Available soon</span>
+      <span data-lang-inline="fr">Disponible bientôt</span>
+      <span data-lang-inline="es">Disponible pronto</span>
+    </a>
+  </div>
+
+</div>
+
+<!-- HOW IT WORKS -->
+<div class="how">
+  <h2 class="how-title">
+    <span data-lang="it" class="active">Come<br>fun<em>ziona</em></span>
+    <span data-lang="en">How<br>it <em>works</em></span>
+    <span data-lang="fr">Com<em>ment</em><br>ça marche</span>
+    <span data-lang="es">Cómo<br>fun<em>ciona</em></span>
+  </h2>
+  <div class="how-steps">
+    <div class="how-step">
+      <span class="step-num">01</span>
+      <div class="step-content">
+        <h3 class="step-title">
+          <span data-lang="it" class="active">Scegli la piattaforma</span>
+          <span data-lang="en">Choose the platform</span>
+          <span data-lang="fr">Choisissez la plateforme</span>
+          <span data-lang="es">Elige la plataforma</span>
+        </h3>
+        <p class="step-text">
+          <span data-lang="it" class="active">Ko-fi per una donazione immediata. Patreon per un rapporto continuativo. Kickstarter per una campagna specifica. GoFundMe direttamente per la Fondazione. Ognuna ha uno scopo preciso.</span>
+          <span data-lang="en">Ko-fi for an immediate donation. Patreon for an ongoing relationship. Kickstarter for a specific campaign. GoFundMe directly for the Foundation. Each has a precise purpose.</span>
+          <span data-lang="fr">Ko-fi pour un don immédiat. Patreon pour une relation continue. Kickstarter pour une campagne spécifique. GoFundMe directement pour la Fondation. Chacune a un objectif précis.</span>
+          <span data-lang="es">Ko-fi para una donación inmediata. Patreon para una relación continua. Kickstarter para una campaña específica. GoFundMe directamente para la Fundación. Cada una tiene un propósito preciso.</span>
+        </p>
+      </div>
+    </div>
+    <div class="how-step">
+      <span class="step-num">02</span>
+      <div class="step-content">
+        <h3 class="step-title">
+          <span data-lang="it" class="active">Contribuisci</span>
+          <span data-lang="en">Contribute</span>
+          <span data-lang="fr">Contribuez</span>
+          <span data-lang="es">Contribuye</span>
+        </h3>
+        <p class="step-text">
+          <span data-lang="it" class="active">Non esiste un importo minimo. Ogni contributo conta — per la produzione, per la distribuzione, per le donne che la Fondazione aiuterà. Il 10% di ogni ricavo andrà direttamente alla Foundation.</span>
+          <span data-lang="en">There is no minimum amount. Every contribution counts — for production, distribution, for the women the Foundation will help. 10% of every revenue goes directly to the Foundation.</span>
+          <span data-lang="fr">Il n'y a pas de montant minimum. Chaque contribution compte — pour la production, la distribution, pour les femmes que la Fondation aidera. 10% de chaque revenu ira directement à la Fondation.</span>
+          <span data-lang="es">No hay importe mínimo. Cada contribución cuenta — para la producción, la distribución, para las mujeres a las que ayudará la Fundación. El 10% de cada ingreso irá directamente a la Fundación.</span>
+        </p>
+      </div>
+    </div>
+    <div class="how-step">
+      <span class="step-num">03</span>
+      <div class="step-content">
+        <h3 class="step-title">
+          <span data-lang="it" class="active">Fai parte della storia</span>
+          <span data-lang="en">Become part of the story</span>
+          <span data-lang="fr">Faites partie de l'histoire</span>
+          <span data-lang="es">Forma parte de la historia</span>
+        </h3>
+        <p class="step-text">
+          <span data-lang="it" class="active">Chi sostiene Women's Revolt™ non è un donatore anonimo. È qualcuno che ha scelto di stare dalla parte giusta — prima che il mondo capisse dove stava quella parte.</span>
+          <span data-lang="en">Those who support Women's Revolt™ are not anonymous donors. They are people who chose to be on the right side — before the world understood where that side was.</span>
+          <span data-lang="fr">Ceux qui soutiennent Women's Revolt™ ne sont pas des donateurs anonymes. Ce sont des personnes qui ont choisi d'être du bon côté — avant que le monde comprenne où se trouvait ce côté.</span>
+          <span data-lang="es">Quienes apoyan Women's Revolt™ no son donantes anónimos. Son personas que eligieron estar del lado correcto — antes de que el mundo entendiera dónde estaba ese lado.</span>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="bottom-bar">
+  <span class="trademark">Women's Revolt™ · © J. Blackwood · Micronos Ltd</span>
+  <div class="nav-links">
+    <a class="nav-link" href="series.html">
+      <span data-lang-inline="it" class="active">La Serie</span>
+      <span data-lang-inline="en">The Series</span>
+      <span data-lang-inline="fr">La Série</span>
+      <span data-lang-inline="es">La Serie</span>
+    </a>
+    <a class="nav-link" href="characters.html">
+      <span data-lang-inline="it" class="active">Personaggi</span>
+      <span data-lang-inline="en">Characters</span>
+      <span data-lang-inline="fr">Personnages</span>
+      <span data-lang-inline="es">Personajes</span>
+    </a>
+    <a class="nav-link" href="foundation.html">
+      <span data-lang-inline="it" class="active">Fondazione</span>
+      <span data-lang-inline="en">Foundation</span>
+      <span data-lang-inline="fr">Fondation</span>
+      <span data-lang-inline="es">Fundación</span>
+    </a>
+    <a class="nav-link" href="main.html">Manifesto</a>
+  </div>
+</footer>
+
+<script>
+  function setLang(lang) {
+    document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+    document.querySelector(`.lang-btn[onclick="setLang('${lang}')"]`).classList.add('active');
+    document.querySelectorAll('[data-lang]').forEach(el => {
+      el.classList.toggle('active', el.getAttribute('data-lang') === lang);
+    });
+    document.querySelectorAll('[data-lang-inline]').forEach(el => {
+      el.classList.toggle('active', el.getAttribute('data-lang-inline') === lang);
+    });
+    document.querySelectorAll('[data-lang-list]').forEach(el => {
+      el.classList.toggle('active', el.getAttribute('data-lang-list') === lang);
+    });
+    document.documentElement.lang = lang;
+  }
+</script>
+</body>
+</html>
