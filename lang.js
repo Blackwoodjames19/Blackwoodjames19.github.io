@@ -1,0 +1,1 @@
+(function(){var b=document.querySelectorAll('[data-set]');for(var i=0;i<b.length;i++){b[i].addEventListener('click',function(){var l=this.getAttribute('data-set');document.documentElement.setAttribute('data-lang',l);document.documentElement.lang=l;try{localStorage.setItem('wr-lang',l)}catch(e){}});}})();

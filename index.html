@@ -1,49 +1,56 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Women's Revolt™ — Her Silence Was The Last Warning</title>
-  <meta name="description" content="Women's Revolt™ — A novel series about five women who changed everything. By J. Blackwood." />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;1,300&family=Bebas+Neue&display=swap" rel="stylesheet" />
-  <style>
-    *{box-sizing:border-box;margin:0;padding:0}
-    html,body{width:100%;background:#080808;color:#f5f0eb;font-family:'Cormorant Garamond',serif}
-    .main{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:60px 24px;min-height:100vh}
-    .brand{font-family:'Bebas Neue',sans-serif;font-size:clamp(42px,12vw,90px);letter-spacing:6px;color:#c0152a;line-height:1;margin-bottom:6px}
-    .brand span{color:#f5f0eb}
-    .sub{font-size:clamp(13px,3.5vw,18px);letter-spacing:5px;color:#c9a84c;text-transform:uppercase;margin-bottom:24px;font-style:italic}
-    .tagline{font-size:clamp(14px,3.5vw,17px);letter-spacing:2px;color:rgba(245,240,235,.5);text-transform:uppercase;margin-bottom:32px;font-style:normal}
-    .tag{font-size:clamp(16px,4vw,22px);font-style:italic;color:rgba(245,240,235,.7);margin-bottom:56px;max-width:340px;line-height:1.6}
-    .btns{display:flex;flex-direction:column;gap:14px;width:100%;max-width:280px;margin-bottom:40px}
-    .btn{display:block;padding:16px 24px;font-family:'Cormorant Garamond',serif;font-size:15px;letter-spacing:3px;text-transform:uppercase;text-decoration:none;border:1px solid}
-    .red{background:#c0152a;color:#f5f0eb;border-color:#c0152a}
-    .gold{background:transparent;color:#c9a84c;border-color:#c9a84c}
-    .soc{display:flex;gap:28px;margin-bottom:24px}
-    .soc a{font-size:12px;letter-spacing:3px;text-transform:uppercase;color:rgba(245,240,235,.4);text-decoration:none}
-    .kofi{font-size:11px;letter-spacing:2px;color:rgba(245,240,235,.2);text-transform:uppercase;text-decoration:none;margin-bottom:32px}
-    .kofi:hover{color:rgba(245,240,235,.4)}
-    .foot{font-size:11px;letter-spacing:2px;color:rgba(245,240,235,.2);text-transform:uppercase}
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Women&#x27;s Revolt™ — A novel by J. Blackwood</title>
+<meta name="description" content="Four nurses. Four marriages that look perfect from the outside. One notebook hidden in a hospital break room. Women&#x27;s Revolt, a novel by J. Blackwood.">
+<meta property="og:title" content="Women&#x27;s Revolt™ — A novel by J. Blackwood">
+<meta property="og:description" content="Four nurses. Four marriages that look perfect from the outside. One notebook hidden in a hospital break room. Women&#x27;s Revolt, a novel by J. Blackwood.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<script>
+(function(){var L=["it","en","fr","es"],l=null;
+try{var q=new URLSearchParams(location.search).get("lang");if(L.indexOf(q)>-1)l=q;}catch(e){}
+if(!l){try{var s=localStorage.getItem("wr-lang");if(L.indexOf(s)>-1)l=s;}catch(e){}}
+if(!l){var n=(navigator.language||"en").slice(0,2).toLowerCase();l=L.indexOf(n)>-1?n:"en";}
+document.documentElement.setAttribute("data-lang",l);document.documentElement.lang=l;})();
+</script>
 </head>
 <body>
-  <div class="main">
-    <div class="brand">Women<span>'</span>s Revolt™</div>
-    <div class="sub">La Rivolta delle Donne</div>
-    <div class="tagline">A novel series about five women who changed everything</div>
-    <div class="tag">Her Silence Was The Last Warning</div>
-    <div class="btns">
-      <a href="https://patreon.com/WomensRevoltOfficial"class="btn red" target="_blank">Join the Revolt — Free</a>
-      <a href="mailto:info@micronos.co.uk" class="btn gold">Contact</a>
-    </div>
-    <div class="soc">
-      <a href="https://x.com/JamesBlackq22a" target="_blank">𝕏 Twitter</a>
-      <a href="https://instagram.com/womensrevolt" target="_blank">Instagram</a>
-      <a href="https://tiktok.com/@womensrevolt" target="_blank">TikTok</a>
-    </div>
-    <a href="https://ko-fi.com/womensrevolt" class="kofi" target="_blank">Support on Ko-fi ↗</a>
-    <div class="foot">© 2026 Micronos Ltd · Venice, Italy</div>
-  </div>
+<header class="nav">
+<a class="logo" href="index.html">Women<span>'</span>s Revolt<sup>™</sup></a>
+<nav class="links"><a href="index.html" class="on"><span class="l l-it">Home</span><span class="l l-en">Home</span><span class="l l-fr">Accueil</span><span class="l l-es">Inicio</span></a><a href="novel.html"><span class="l l-it">Il Romanzo</span><span class="l l-en">The Novel</span><span class="l l-fr">Le Roman</span><span class="l l-es">La Novela</span></a><a href="foundation.html"><span class="l l-it">La Fondazione</span><span class="l l-en">The Foundation</span><span class="l l-fr">La Fondation</span><span class="l l-es">La Fundación</span></a><a href="support.html"><span class="l l-it">Sostieni</span><span class="l l-en">Support</span><span class="l l-fr">Soutenir</span><span class="l l-es">Apoya</span></a></nav>
+<div class="langs" role="group" aria-label="Language"><button type="button" data-set="it">IT</button><button type="button" data-set="en">EN</button><button type="button" data-set="fr">FR</button><button type="button" data-set="es">ES</button></div>
+</header>
+<main class="home">
+<section class="hero">
+<p class="eyebrow"><span class="l l-it">Un romanzo di J. Blackwood</span><span class="l l-en">A novel by J. Blackwood</span><span class="l l-fr">Un roman de J. Blackwood</span><span class="l l-es">Una novela de J. Blackwood</span></p>
+<h1 class="brand">Women<span>'</span>s Revolt<sup>™</sup></h1>
+<p class="sub">La Rivolta delle Donne</p>
+<p class="hook"><span class="l l-it">Quattro infermiere. Quattro matrimoni che dall'esterno sembrano perfetti. Un quaderno nascosto nella sala pausa di un ospedale.</span><span class="l l-en">Four nurses. Four marriages that look perfect from the outside. One notebook hidden in a hospital break room.</span><span class="l l-fr">Quatre infirmières. Quatre mariages qui paraissent parfaits vus de l'extérieur. Un carnet caché dans la salle de pause d'un hôpital.</span><span class="l l-es">Cuatro enfermeras. Cuatro matrimonios que desde fuera parecen perfectos. Un cuaderno escondido en la sala de descanso de un hospital.</span></p>
+<p class="tag"><span class="l l-it">Il suo silenzio era l'ultimo avvertimento.</span><span class="l l-en">Her silence was the last warning.</span><span class="l l-fr">Son silence était le dernier avertissement.</span><span class="l l-es">Su silencio era la última advertencia.</span></p>
+<div class="btns">
+<a class="btn red" href="https://womensrevolt.substack.com" target="_blank" rel="noopener"><span class="l l-it">Segui la storia su Substack — gratis</span><span class="l l-en">Follow the story on Substack — free</span><span class="l l-fr">Suivez l'histoire sur Substack — gratuit</span><span class="l l-es">Sigue la historia en Substack — gratis</span></a>
+<a class="btn gold" href="novel.html"><span class="l l-it">Scopri il romanzo</span><span class="l l-en">Discover the novel</span><span class="l l-fr">Découvrir le roman</span><span class="l l-es">Descubre la novela</span></a>
+</div>
+<p class="status"><span class="l l-it">Di prossima uscita</span><span class="l l-en">Forthcoming</span><span class="l l-fr">À paraître</span><span class="l l-es">Próximamente</span></p>
+<a class="kofi" href="https://ko-fi.com/womensrevolt" target="_blank" rel="noopener"><span class="l l-it">Sostieni il progetto su Ko-fi</span><span class="l l-en">Support the project on Ko-fi</span><span class="l l-fr">Soutenir le projet sur Ko-fi</span><span class="l l-es">Apoya el proyecto en Ko-fi</span> ↗</a>
+</section>
+</main>
+<footer class="foot">
+<div class="social">
+<a href="https://womensrevolt.substack.com" target="_blank" rel="noopener">Substack</a>
+<a href="https://instagram.com/womensrevolt" target="_blank" rel="noopener">Instagram</a>
+<a href="https://www.linkedin.com/company/womensrevolt" target="_blank" rel="noopener">LinkedIn</a>
+<a href="https://x.com/JamesBlackq22a" target="_blank" rel="noopener">X</a>
+<a href="https://tiktok.com/@womensrevolt" target="_blank" rel="noopener">TikTok</a>
+</div>
+<p class="small"><a href="mailto:info@micronos.co.uk">info@micronos.co.uk</a></p>
+<p class="small">Women's Revolt™ · © J. Blackwood · Micronos Ltd · Venice, Italy</p>
+</footer>
+<script src="lang.js"></script>
 </body>
 </html>
